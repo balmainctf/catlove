@@ -1,0 +1,42 @@
+<div>
+	<p>搜索关键字:</p><input type="text" ng-model="searchModel">
+	<select ng-model="mobileName">
+		<option value="">all</option>
+		<option value="0">iphone</option>
+		<option value="1">sanxin</option>
+	</select>
+	<br>
+	<div>文本框内容:<span>{{searchModel}}</span></div>
+	<br>
+	<div>我选择了:<span>{{mobileName | cnSelect}}</span></div>
+	<br>
+	<select ng-model="orderName">
+		<option value="id">按id</option>
+		<option value="price">按价格</option>
+		<option value="name">按名称</option>
+	</select>
+
+	<select ng-model="orderbylist">
+		<option value="false">升序</option>
+		<option value="true">降序</option>
+	</select>
+
+	<br>
+
+	<p ng-cloak>我筛选到{{filterMobiles.length}}条记录</p>
+
+</div>
+
+<div>
+	<ul>
+<!-- 		<li ng-repeat="mobile in mobiles | filter : {name : searchModel} | filter : {pid : mobileName} | orderBy : orderName : orderbylist"> -->
+		<li ng-repeat="mobile in filterMobiles = (mobiles | filter : {name : searchModel} | filter : {pid : mobileName} | orderBy : orderName : orderbylist)">
+			<p>手机的ID:{{mobile.id}}</p>
+			<img style="width:200px;" ng-src="{{mobile.imgurl}}" >
+			<p ng-cloak>手机名字:{{mobile.name}}</p>
+			<p ng-cloak>手机价格:{{mobile.price | currency:'RMB '}}</p>
+			<span ui-sref="show({ id: mobile.id })"><a href="">点击查看详情</a></span>
+			<hr>
+		</li>
+	</ul>
+</div>
