@@ -107,10 +107,12 @@ myServiceModule.factory('getListFactory', ['$http','$q',function($http,$q){
 			}).success(function(e,status){
 				// 声明执行成功，即http请求数据成功，可以返回数据了
 				deferred.resolve(e);
+				//在错误的情况下调用
+				deferred.reject('服务器连接超时')
 			}).error(function(e,status){
 				if(status == 404){
 					var d = {errorMsg:'服务器连接超时',isLoadMore:false};
-					deferred.resolve(d);
+					deferred.reject(d);
 				}
 			});
 			// 返回承诺，这里并不是最终数据，而是访问最终数据的API

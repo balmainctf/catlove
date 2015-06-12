@@ -10,12 +10,12 @@ myControllerModule.controller('menuController', ['$scope', function($scope){
 myControllerModule.controller('mainController',function($scope,$state){
 	//点击进入项目页
 	$scope.goListPage = function(){
-		$state.go('tab.list');
+		$state.go('menu.tab.list');
 	}
 });
 
 
-myControllerModule.controller('testController', ['$scope','getListFactory','myPopup', function($scope,getListFactory,myPopup){
+myControllerModule.controller('testController', ['$scope','getListFactory','myPopup','$ionicModal', function($scope,getListFactory,myPopup,$ionicModal){
 	
 	$scope.user = {};
 	//登录验证
@@ -44,6 +44,23 @@ myControllerModule.controller('testController', ['$scope','getListFactory','myPo
 
 	}
 
+	//创建modal
+	$ionicModal.fromTemplateUrl('templates/login.html', {
+            scope: $scope,
+            animation: 'silde-in-up'
+        }).then(function (modal) {
+        	//将modal对象赋值给modal
+            $scope.modal = modal;
+        });
+
+	//模态框显示
+	$scope.modalShow = function(){
+		$scope.modal.show();
+	}
+
+	$scope.closeLogin = function(){
+		$scope.modal.hide();
+	}
 	
 
 	
@@ -113,6 +130,10 @@ myControllerModule.controller('listController',function($scope,getListFactory,$r
 		  result.then(function(e){
 			//console.log(e);
 			$scope.mobiles = e.result;
+
+		  },function(e){    //错误时
+		  		$scope.isLoadMore = e.isLoadMore;
+		  		console.log($scope.errorMsg);
 		  });		  		
 	  }
 
@@ -232,7 +253,7 @@ myControllerModule.controller('showController', ['$scope', '$state','$stateParam
 
 	//返回列表页
 	$scope.goBack = function(){
-		$state.go('tab.list');
+		$state.go('menu.tab.list');
 	}
 
 }]);

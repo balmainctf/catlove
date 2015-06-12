@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('demoShow',['ionic','myControllerModule','myServiceModule','myFilterModule']);
+var app = angular.module('demoShow',['ionic','myControllerModule','myServiceModule','myFilterModule','ngAnimate']);
 
 app.run(function($rootScope,$state,$ionicPlatform){
 	  
@@ -21,18 +21,61 @@ app.run(function($rootScope,$state,$ionicPlatform){
 //ui.router路由配置
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 	//默认路由
-	$urlRouterProvider.otherwise('/tab/main');
+	// $urlRouterProvider.otherwise('/tab/main');
+
+	// $stateProvider.state('tab',{
+ //    	url: '/tab',
+ //    	abstract: true,
+ //    	templateUrl: "templates/tabs.html"
+ //    }).state('tab.main',{
+ //    	url: '/main',
+ //    	views: {
+	// 	      'tab-main': {
+	// 	        templateUrl: 'templates/main.html',
+	// 	        controller: 'mainController'
+	// 	      }
+ //    	}
+ //    }).state('tab.list',{
+ //    	url: '/list',
+ //    	views: {
+	// 	      'tab-list': {
+	// 	        templateUrl: 'templates/list.html',
+	// 	        controller: 'listController'
+	// 	      }
+ //    	}
+ //    }).state('tab.test',{
+ //    	url: '/test',
+ //    	views: {
+	// 	      'tab-test': {
+	// 	        templateUrl: 'templates/test.html',
+	// 	        controller: 'testController'
+	// 	      }
+ //    	}
+ //    }).state('show',{
+ //    	url: '/show:id',
+ //        templateUrl: 'templates/show.html',
+ //        controller: 'showController'
+    	
+ //    });
+
+
+
+	$urlRouterProvider.otherwise('/menu/tab/main');
 
 	$stateProvider.state('menu',{
     	url: '/menu',
     	abstract: true,
     	templateUrl: "templates/menu.html",
     	controller:'menuController'
-    }).state('tab',{
+    }).state('menu.tab',{
     	url: '/tab',
-    	abstract: true,
-    	templateUrl: "templates/tabs.html"
-    }).state('tab.main',{
+    	views: {
+		      'menuContent': {
+		        templateUrl: 'templates/tabs.html',
+		        controller: 'mainController'
+		      }
+    	}
+    }).state('menu.tab.main',{
     	url: '/main',
     	views: {
 		      'tab-main': {
@@ -40,7 +83,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		        controller: 'mainController'
 		      }
     	}
-    }).state('tab.list',{
+    }).state('menu.tab.list',{
     	url: '/list',
     	views: {
 		      'tab-list': {
@@ -48,7 +91,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		        controller: 'listController'
 		      }
     	}
-    }).state('tab.test',{
+    }).state('menu.tab.test',{
     	url: '/test',
     	views: {
 		      'tab-test': {
@@ -63,45 +106,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     	
     });
 
-
-
-	// $urlRouterProvider.otherwise('/menu/main');
-
-	// $stateProvider.state('menu',{
- //    	url: '/menu',
- //    	abstract: true,
- //    	templateUrl: "templates/menu.html",
- //    	controller:'menuController'
- //    }).state('menu.main',{
- //    	url: '/main',
- //    	views: {
-	// 	      'menu-main': {
-	// 	        templateUrl: 'templates/main.html',
-	// 	        controller: 'mainController'
-	// 	      }
- //    	}
- //    }).state('menu.list',{
- //    	url: '/list',
- //    	views: {
-	// 	      'menu-list': {
-	// 	        templateUrl: 'templates/list.html',
-	// 	        controller: 'listController'
-	// 	      }
- //    	}
- //    }).state('menu.test',{
- //    	url: '/test',
- //    	views: {
-	// 	      'menu-test': {
-	// 	        templateUrl: 'templates/test.html',
-	// 	        controller: 'testController'
-	// 	      }
- //    	}
- //    }).state('show',{
- //    	url: '/show:id',
- //        templateUrl: 'templates/show.html',
- //        controller: 'showController'
-    	
- //    });
 
 
 }]);
