@@ -1,0 +1,68 @@
+<ion-view view-title="{{listTitle}}">
+  <ion-content class="padding">
+	<div>
+		<div class="list list-inset">
+			  <label class="item item-input">
+				    <i class="icon ion-search placeholder-icon"></i>
+				    <input type="text" placeholder="Search" ng-model="mobile.search" ng-change="searchChange()">
+			  </label>
+		</div>
+
+		<div class="list">
+
+		  <label class="item item-input item-select">
+		    <div class="input-label">
+		      选择类型
+		    </div>
+		    <select ng-model="mobile.name" ng-options="sel.name for sel in select" ng-change="nameChange()">
+				<option value="">all</option>
+		    </select>
+		  </label>
+		</div>
+		
+
+		<div class="list">
+		  <label class="item item-input item-select">
+		    <div class="input-label">
+		      排序内容
+		    </div>
+		    <select ng-model="orderName">
+				<option value="id">按id</option>
+				<option value="price">按价格</option>
+				<option value="name">按名称</option>
+		    </select>
+		  </label>
+		</div>
+
+
+		<ion-toggle  ng-model="orderbylist"> 升序/降序</ion-toggle>
+
+		<p ng-cloak>我筛选到{{filterMobiles.length}}条记录</p>
+
+		<ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder">
+
+		      <ion-refresher pulling-text="努力加载中..." on-refresh="doRefresh()" ></ion-refresher>
+
+		      <ion-item class="item-remove-animate item-avatar" ng-repeat="mobile in filterMobiles = (mobiles | orderBy : orderName : orderbylist)" type="item-text-wrap" ui-sref="show({ id: mobile.id })">
+
+		          <img ng-src="{{mobile.imgurl}}">
+		          <h2>手机名称:{{mobile.name}}</h2>
+		          <p>手机价格:{{mobile.price | currency:'RMB '}}</p>
+		          <p>手机的ID:{{mobile.id}}</p>
+		          <ion-option-button class="button-assertive" ng-click="myDelete({{mobile.id}})">
+		            delete
+		          </ion-option-button>
+		          <ion-option-button class="button-calm" ng-click="myShare({{mobile.id}})">
+		            Share	
+		          </ion-option-button>
+
+		      </ion-item>
+<!-- ionInfiniteScroll 允许你在用户滚动到内部内容的边缘时调用一个回调函数。
+当用户滚动内容距离底部小于distance定义的距离时，会自动调用on-infinite中定义的回调函数，可以加载更多内容，加载完更多内容后，在控制器中需要广播croll.infiniteScrollComplete 事件 -->
+			<ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="moreDataCanBeLoaded()"> </ion-infinite-scroll>
+
+	    </ion-list>
+
+	</div>
+  </ion-content>
+</ion-view>

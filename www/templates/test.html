@@ -1,0 +1,35 @@
+<ion-view view-title="测试页面">
+  <ion-content>
+    <ion-list>
+    <ion-toggle  ng-model="settings.enableFriends">
+        Enable Friends
+    </ion-toggle>
+    </ion-list>
+
+    <ion-list>
+    	  <h3>登录模拟</h3>
+		  <label class="item item-input">
+		    <span class="input-label">Username</span>
+		    <input ng-model="user.name" type="text">
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label">Password</span>
+		    <input ng-model="user.pwd" type="password">
+		  </label>
+		  <button class="button button-block button-positive" ng-click="submitLogin()">
+			  登录
+		  </button>
+    </ion-list>
+
+    <ion-list>
+    	  <h3>文件上传</h3>
+		  <label class="item item-input">
+		    <input ng-model="user.file" ng-show="false" type="file">
+		  </label>
+		  <button class="button button-block button-positive" ng-click="upload()">
+			  点击上传
+		  </button>
+    </ion-list>
+
+  </ion-content>
+</ion-view>
