@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('demoShow',['ionic','myControllerModule','myServiceModule','myFilterModule','ngAnimate']);
+var app = angular.module('demoShow',['ionic','myControllerModule','myServiceModule','myFilterModule','ngAnimate','ngCookies']);
 
 app.run(function($rootScope,$state,$ionicPlatform){
 	  

@@ -5,7 +5,7 @@ var myControllerModule = angular.module('myControllerModule',['ionic','myFilterM
 
 myControllerModule.controller('menuController', ['$scope', function($scope){
 	
-}])
+}]);
 
 myControllerModule.controller('mainController',function($scope,$state){
 	//点击进入项目页
@@ -15,7 +15,7 @@ myControllerModule.controller('mainController',function($scope,$state){
 });
 
 
-myControllerModule.controller('testController', ['$scope','getListFactory','myPopup','$ionicModal', function($scope,getListFactory,myPopup,$ionicModal){
+myControllerModule.controller('testController', ['$scope','getListFactory','myPopup','$ionicModal','$cookieStore', function($scope,getListFactory,myPopup,$ionicModal,$cookieStore){
 	
 	$scope.user = {};
 	//登录验证
@@ -40,6 +40,8 @@ myControllerModule.controller('testController', ['$scope','getListFactory','myPo
 				myPopup.puAlert(opt);
 			}
 			//$scope.mobiles = e.result;
+		},function(e){
+			
 		});
 
 	}
@@ -63,6 +65,48 @@ myControllerModule.controller('testController', ['$scope','getListFactory','myPo
 	}
 	
 
+	//百叶
+	$scope.groups = [];
+
+	for (var i=0; i<3; i++) {
+	    $scope.groups[i] = {
+	      name: i,
+	      items: []
+	    };
+	    for (var j=0; j<3; j++) {
+	      $scope.groups[i].items.push(i + '-' + j);
+	    }
+	}
+	  
+	$scope.toggleGroup = function(group) {
+	    if ($scope.isGroupShown(group)) {
+	      $scope.shownGroup = null;
+	    } else {
+	      $scope.shownGroup = group;
+	    }
+	};
+
+	$scope.isGroupShown = function(group) {
+	    return $scope.shownGroup === group;
+	};
+
+
+	//cookie
+	$scope.data = {};
+	//存入cookie
+	$scope.saveCookie = function(){
+		var username = $scope.data.cookieName;
+		console.log(username);
+		$cookieStore.put('username',username);
+	}
+	//获得cookie
+	$scope.getCookie = function(){
+		console.log($cookieStore.get('username'));
+	}
+	//删除cookie
+	$scope.removeCookie = function(){
+		$cookieStore.remove('username');
+	}
 	
 
 
