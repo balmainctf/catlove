@@ -1,0 +1,18 @@
+doctype html
+html
+	head
+		meta
+		title jade学习
+	body
+		h1 jade学习
+		div#myDiv.divClass 元素标签语法
+		#myDiv1.divClass1 没有元素的时候默认是div标签
+		p(id="myP1",class="myPclass") 在命令行输入jade filename就可以编译文件了，也可以加-P(未压缩版) -w(监控jade文件变化)
+		input(type="text",value="jade学习",name="input属性")
+		input(type="checkbox",checked)
+		p.
+			    p标签多文本的时候可以在P标签后加上一个点
+			<span>回车缩进<span>，就可以自由的控制文本换行的问题了
+			p后面的那个<strong>点</strong>不能忘记
+		br
+		a(href="www.baidu.com",title="a标签") a标签链接
