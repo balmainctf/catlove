@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta>
-    <title>jade学习</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <title>JADE学习</title>
   </head>
   <body>
+    <h1>流程代码</h1>
+    <p>name:zhangsan</p>
+    <p>age:30</p>
+    <p>name: zhangsan</p>
+    <p>age: 30</p>
+    <h1>hahaha</h1>
+    <p>hahahahaha</p>
+    <p>&lt;span&gt;&lt;script&gt;alert(1)&lt;/script&gt;&lt;/span&gt;</p>
+    <p><span><script>alert(1)</script></span></p>
+    <p>hahahahaha</p>
+    <p>&lt;span&gt;&lt;script&gt;alert(1)&lt;/script&gt;&lt;/span&gt;</p>
+    <p><span><script>alert(1)</script></span></p>
+    <p>#{htmlStr}</p>
+    <p>!{htmlStr}</p><br>
     <h1>jade学习</h1>
+    <!-- jade学习-->
+    <!--
+    ul.ccc
+    	li hahahahaha
+    	li cicicicici
+    -->
     <div id="myDiv" class="divClass">元素标签语法</div>
     <div id="myDiv1" class="divClass1">没有元素的时候默认是div标签</div>
     <p id="myP1" class="myPclass">在命令行输入jade filename就可以编译文件了，也可以加-P(未压缩版) -w(监控jade文件变化)</p>
@@ -13,8 +34,14 @@
     <input type="checkbox" checked>
     <p>
           p标签多文本的时候可以在P标签后加上一个点
-      <span>回车缩进<span>，就可以自由的控制文本换行的问题了
+      <span>回车缩进</span>，就可以自由的控制文本换行的问题了
       p后面的那个<strong>点</strong>不能忘记
     </p><br><a href="www.baidu.com" title="a标签">a标签链接</a>
+    <ul id="myul" class="myultest">
+      <li>haha</li>
+      <li>xixi</li>
+      <li>lulu</li>
+    </ul>
+    <script src="index.js"></script>
   </body>
 </html>

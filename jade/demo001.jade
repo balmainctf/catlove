@@ -1,10 +1,36 @@
 doctype html
 html
 	head
-		meta
-		title jade学习
+		- var pageName = 'jade';
+		meta(charset="utf-8")
+		link(rel="stylesheet", type="text/css" href="/stylesheets/style.css")
+		title #{pageName.toUpperCase()}学习
 	body
+		h1 流程代码
+		- var jsonData = {name:'zhangsan',age:'30'};
+		- for (var k in jsonData)
+			p= k+':'+jsonData[k]
+		- each value, key in jsonData
+			p #{key}: #{value}
+		h1 hahaha
+		- var str = 'hahahahaha';
+		- var htmlStr = '<span><script>alert(1)</script></span>';
+		p #{str}
+		p #{htmlStr}
+		p !{htmlStr}
+		p= str
+		p= htmlStr
+		p!= htmlStr
+		p \#{htmlStr}
+		p \!{htmlStr}
+		br
 		h1 jade学习
+		// jade学习
+		//- xixixixixi
+		//
+			ul.ccc
+				li hahahahaha
+				li cicicicici
 		div#myDiv.divClass 元素标签语法
 		#myDiv1.divClass1 没有元素的时候默认是div标签
 		p(id="myP1",class="myPclass") 在命令行输入jade filename就可以编译文件了，也可以加-P(未压缩版) -w(监控jade文件变化)
@@ -12,7 +38,12 @@ html
 		input(type="checkbox",checked)
 		p.
 			    p标签多文本的时候可以在P标签后加上一个点
-			<span>回车缩进<span>，就可以自由的控制文本换行的问题了
+			<span>回车缩进</span>，就可以自由的控制文本换行的问题了
 			p后面的那个<strong>点</strong>不能忘记
 		br
 		a(href="www.baidu.com",title="a标签") a标签链接
+		ul#myul.myultest
+			li haha
+			li xixi
+			li lulu
+		script(src="index.js")
