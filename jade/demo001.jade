@@ -1,17 +1,81 @@
-doctype html
-html
-	head
-		- var pageName = 'jade';
-		meta(charset="utf-8")
-		link(rel="stylesheet", type="text/css" href="/stylesheets/style.css")
-		title #{pageName.toUpperCase()}学习
-	body
+extends layout.jade
+
+block content
+		include title.html
+		h1 mixin
+		mixin lesson
+			p node study
+		+lesson
+		mixin study(name,list)
+			p= name
+			ul.ulClass
+				each i in list
+					li= i
+		+study('xiaoming',['java','php','asp','node'])
+		mixin group(student)
+			h4 #{student.name}
+			+study(student.name,student.list)
+		+group({name:'jerry',list:['js','css','html']})
+		mixin showBlock(test)
+			p #{test}
+			if block
+				block
+		+showBlock('hahahahaha')
+			p hello world
+
+		h1 if-else
+		- var isStr = true;
+		- var lessons = ['jade','node','php'];
+		if lessons
+			if lessons.length>0
+				p= lessons.join('*')
+			else if lessons.length>1
+				p= lessons.join('@')
+			else if lessons.length>2
+				p= lessons.join('$')
+			else
+				p= noArray
+		else
+			p= noArray
+
+		h1 unless
+		unless !isStr
+			p #{lessons.length}
+
+		h1 case
+		-var caseName = 'node';
+		case caseName
+			when 'java'
+				p hi java
+			when 'php'
+			when 'node' : p hi #{caseName}
+			default
+				p hi #{caseName}
+
+
 		h1 流程代码
 		- var jsonData = {name:'zhangsan',age:'30'};
 		- for (var k in jsonData)
 			p= k+':'+jsonData[k]
 		- each value, key in jsonData
 			p #{key}: #{value}
+		- var arrList = ['node','php','java'];
+		each item in arrList
+			p= item
+		
+		- var sectiongs = [{id:1,name:'zhangsan',items:['aa','bb']},{id:2,name:'lisi',items:['cc','dd']},{id:3,name:'wanger',items:['ee','ff']}];
+		dl
+			each section in sectiongs
+				dt= section.id+':'+section.name
+				each item in section.items
+					dd= item
+		
+		h2 while
+		- var n = 0;
+		ul
+			while n<4
+				li #{n++}
+
 		h1 hahaha
 		- var str = 'hahahahaha';
 		- var htmlStr = '<span><script>alert(1)</script></span>';
@@ -46,4 +110,5 @@ html
 			li haha
 			li xixi
 			li lulu
+		include footer.jade
 		script(src="index.js")
