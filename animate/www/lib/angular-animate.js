@@ -59,7 +59,7 @@
  * the animate service will automatically add .ng-enter and .ng-leave to the element
  * to trigger the CSS transition/animations
  * -->
- * <ANY class="slide" ng-include="..."></ANY>
+ * <ANY class="slide" ng-includes="..."></ANY>
  * ```
  *
  * Keep in mind that, by default, if an animation is running, any child elements cannot be animated
@@ -353,7 +353,7 @@
  *
  * ### Applying Directive-specific Styles to an Animation
  * In some cases a directive or service may want to provide `$animate` with extra details that the animation will
- * include into its animation. Let's say for example we wanted to render an animation that animates an element
+ * includes into its animation. Let's say for example we wanted to render an animation that animates an element
  * towards the mouse coordinates as to where the user clicked last. By collecting the X/Y coordinates of the click
  * (via the event parameter) we can set the `top` and `left` styles into an object and pass that into our function
  * call to `$animate.addClass`.
@@ -370,7 +370,7 @@
  * ```
  *
  * Now when the animation runs, and a transition or keyframe animation is picked up, then the animation itself will
- * also include and transition the styling of the `left` and `top` properties into its running animation. If we want
+ * also includes and transition the styling of the `left` and `top` properties into its running animation. If we want
  * to provide some starting animation values then we can do so by placing the starting animations styles into an object
  * called `from` in the same object as the `to` animations.
  *

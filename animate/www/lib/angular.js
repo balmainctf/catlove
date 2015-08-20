@@ -5701,7 +5701,7 @@ function $CacheFactoryProvider() {
  *
  * To retrieve the template later, simply use it in your HTML:
  * ```html
- * <div ng-include=" 'templateId.html' "></div>
+ * <div ng-includes=" 'templateId.html' "></div>
  * ```
  *
  * or get it via Javascript:
@@ -8972,7 +8972,7 @@ function $HttpProvider() {
      * into `$http`.
      *
      * Note that if you provide these properties on the config object the default transformations will be
-     * overwritten. If you wish to augment the default transformations then you must include them in your
+     * overwritten. If you wish to augment the default transformations then you must includes them in your
      * local transformation array.
      *
      * The following code demonstrates adding a new response transformation to be run after the default response
@@ -10709,7 +10709,7 @@ function LocationHashbangUrl(appBase, hashPrefix) {
      *   * a.pathname === '/C:/foo' //true
      *
      * Inside of Angular, we're always using pathnames that
-     * do not include drive names for routing.
+     * do not includes drive names for routing.
      */
     function removeWindowsDriveName(path, url, base) {
       /*
@@ -10801,7 +10801,7 @@ function LocationHashbangInHtml5Url(appBase, hashPrefix) {
         hash = this.$$hash ? '#' + encodeUriSegment(this.$$hash) : '';
 
     this.$$url = encodePath(this.$$path) + (search ? '?' + search : '') + hash;
-    // include hashPrefix in $$absUrl when $$url is empty so IE8 & 9 do not reload page because of removal of '#'
+    // includes hashPrefix in $$absUrl when $$url is empty so IE8 & 9 do not reload page because of removal of '#'
     this.$$absUrl = appBase + hashPrefix + this.$$url;
   };
 
@@ -13959,7 +13959,7 @@ function $RootScopeProvider() {
        *
        * - The `obj` collection is observed via standard $watch operation and is examined on every
        *   call to $digest() to see if any items have been added, removed, or moved.
-       * - The `listener` is called whenever anything within the `obj` has changed. Examples include
+       * - The `listener` is called whenever anything within the `obj` has changed. Examples includes
        *   adding, removing, and moving items belonging to an object or array.
        *
        *
@@ -14877,7 +14877,7 @@ var SCE_CONTEXTS = {
   CSS: 'css',
   URL: 'url',
   // RESOURCE_URL is a subtype of URL used in contexts where a privileged resource is sourced from a
-  // url.  (e.g. ng-include, script src, templateUrl)
+  // url.  (e.g. ng-includes, script src, templateUrl)
   RESOURCE_URL: 'resourceUrl',
   JS: 'js'
 };
@@ -15135,7 +15135,7 @@ function $SceDelegateProvider() {
      *
      * @description
      * Returns an object that is trusted by angular for use in specified strict
-     * contextual escaping contexts (such as ng-bind-html, ng-include, any src
+     * contextual escaping contexts (such as ng-bind-html, ng-includes, any src
      * attribute interpolation, any dom event binding attribute interpolation
      * such as for onclick,  etc.) that uses the provided value.
      * See {@link ng.$sce $sce} for enabling strict contextual escaping.
@@ -15337,7 +15337,7 @@ function $SceDelegateProvider() {
  *
  * ## Impact on loading templates
  *
- * This applies both to the {@link ng.directive:ngInclude `ng-include`} directive as well as
+ * This applies both to the {@link ng.directive:ngInclude `ng-includes`} directive as well as
  * `templateUrl`'s specified by {@link guide/directive directives}.
  *
  * By default, Angular only loads templates from the same domain and protocol as the application
@@ -15360,14 +15360,14 @@ function $SceDelegateProvider() {
  * It's important to remember that SCE only applies to interpolation expressions.
  *
  * If your expressions are constant literals, they're automatically trusted and you don't need to
- * call `$sce.trustAs` on them (remember to include the `ngSanitize` module) (e.g.
+ * call `$sce.trustAs` on them (remember to includes the `ngSanitize` module) (e.g.
  * `<div ng-bind-html="'<b>implicitly trusted</b>'"></div>`) just works.
  *
  * Additionally, `a[href]` and `img[src]` automatically sanitize their URLs and do not pass them
  * through {@link ng.$sce#getTrusted $sce.getTrusted}.  SCE doesn't play a role here.
  *
  * The included {@link ng.$sceDelegate $sceDelegate} comes with sane defaults to allow you to load
- * templates in `ng-include` from your application's domain without having to even know about SCE.
+ * templates in `ng-includes` from your application's domain without having to even know about SCE.
  * It blocks loading templates from other domains or loading templates over http from an https
  * served document.  You can change these by setting your own custom {@link
  * ng.$sceDelegateProvider#resourceUrlWhitelist whitelists} and {@link
@@ -15385,7 +15385,7 @@ function $SceDelegateProvider() {
  * | `$sce.HTML`         | For HTML that's safe to source into the application.  The {@link ng.directive:ngBindHtml ngBindHtml} directive uses this context for bindings. If an unsafe value is encountered and the {@link ngSanitize $sanitize} module is present this will sanitize the value instead of throwing an error. |
  * | `$sce.CSS`          | For CSS that's safe to source into the application.  Currently unused.  Feel free to use it in your own directives. |
  * | `$sce.URL`          | For URLs that are safe to follow as links.  Currently unused (`<a href=` and `<img src=` sanitize their urls and don't constitute an SCE context. |
- * | `$sce.RESOURCE_URL` | For URLs that are not only safe to follow as links, but whose contents are also safe to include in your application.  Examples include `ng-include`, `src` / `ngSrc` bindings for tags other than `IMG` (e.g. `IFRAME`, `OBJECT`, etc.)  <br><br>Note that `$sce.RESOURCE_URL` makes a stronger statement about the URL than `$sce.URL` does and therefore contexts requiring values trusted for `$sce.RESOURCE_URL` can be used anywhere that values trusted for `$sce.URL` are required. |
+ * | `$sce.RESOURCE_URL` | For URLs that are not only safe to follow as links, but whose contents are also safe to includes in your application.  Examples includes `ng-includes`, `src` / `ngSrc` bindings for tags other than `IMG` (e.g. `IFRAME`, `OBJECT`, etc.)  <br><br>Note that `$sce.RESOURCE_URL` makes a stronger statement about the URL than `$sce.URL` does and therefore contexts requiring values trusted for `$sce.RESOURCE_URL` can be used anywhere that values trusted for `$sce.URL` are required. |
  * | `$sce.JS`           | For JavaScript that is safe to execute in your application's context.  Currently unused.  Feel free to use it in your own directives. |
  *
  * ## Format of items in {@link ng.$sceDelegateProvider#resourceUrlWhitelist resourceUrlWhitelist}/{@link ng.$sceDelegateProvider#resourceUrlBlacklist Blacklist} <a name="resourceUrlPatternItem"></a>
@@ -15661,7 +15661,7 @@ function $SceProvider() {
      * @description
      * Delegates to {@link ng.$sceDelegate#trustAs `$sceDelegate.trustAs`}.  As such,
      * returns an object that is trusted by angular for use in specified strict contextual
-     * escaping contexts (such as ng-bind-html, ng-include, any src attribute
+     * escaping contexts (such as ng-bind-html, ng-includes, any src attribute
      * interpolation, any dom event binding attribute interpolation such as for onclick,  etc.)
      * that uses the provided value.  See * {@link ng.$sce $sce} for enabling strict contextual
      * escaping.
@@ -18499,7 +18499,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
  * that has been rendered as invalid after it has been validated:
  *
  * <pre>
- * //be sure to include ngAnimate as a module to hook into more
+ * //be sure to includes ngAnimate as a module to hook into more
  * //advanced animations
  * .my-form {
  *   transition:0.5s linear all;
@@ -20405,7 +20405,7 @@ var ngBindTemplateDirective = ['$interpolate', '$compile', function($interpolate
  * the resulting HTML content will be sanitized using the {@link ngSanitize.$sanitize $sanitize} service.
  * To utilize this functionality, ensure that `$sanitize` is available, for example, by including {@link
  * ngSanitize} in your module's dependencies (not in core Angular). In order to use {@link ngSanitize}
- * in your module's dependencies, you need to include "angular-sanitize.js" in your application.
+ * in your module's dependencies, you need to includes "angular-sanitize.js" in your application.
  *
  * You may also bypass sanitization for values you know are safe. To do so, bind to
  * an explicitly trusted value via {@link ng.$sce#trustAsHtml $sce.trustAsHtml}.  See the example
@@ -21221,7 +21221,7 @@ var ngControllerDirective = [function() {
  *
  * CSP forbids JavaScript to inline stylesheet rules. In non CSP mode Angular automatically
  * includes some CSS rules (e.g. {@link ng.directive:ngCloak ngCloak}).
- * To make those directives work in CSP mode, include the `angular-csp.css` manually.
+ * To make those directives work in CSP mode, includes the `angular-csp.css` manually.
  *
  * Angular tries to autodetect if CSP is active and automatically turn on the CSP-safe mode. This
  * autodetection however triggers a CSP error to be logged in the console:
@@ -22031,7 +22031,7 @@ var ngIfDirective = ['$animate', function($animate) {
        url of the template: <code>{{template.url}}</code>
        <hr/>
        <div class="slide-animate-container">
-         <div class="slide-animate" ng-include="template.url"></div>
+         <div class="slide-animate" ng-includes="template.url"></div>
        </div>
      </div>
     </file>
@@ -22092,7 +22092,7 @@ var ngIfDirective = ['$animate', function($animate) {
     </file>
     <file name="protractor.js" type="protractor">
       var templateSelect = element(by.model('template'));
-      var includeElem = element(by.css('[ng-include]'));
+      var includeElem = element(by.css('[ng-includes]'));
 
       it('should load template1.html', function() {
         expect(includeElem.getText()).toMatch(/Content of template1.html/);
@@ -22210,9 +22210,9 @@ var ngIncludeDirective = ['$templateRequest', '$anchorScroll', '$animate', '$sce
               var newScope = scope.$new();
               ctrl.template = response;
 
-              // Note: This will also link all children of ng-include that were contained in the original
+              // Note: This will also link all children of ng-includes that were contained in the original
               // html. If that content contains controllers, ... they could pollute/change the scope.
-              // However, using ng-include on an element with additional content does not make sense...
+              // However, using ng-includes on an element with additional content does not make sense...
               // Note: We can't remove them in the cloneAttchFn of $transclude as that
               // function is called before linking the content, which would apply child
               // directives to non existing elements.
@@ -22598,7 +22598,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  * Note that `contenteditable` is an HTML5 attribute, which tells the browser to let the element
  * contents be edited in place by the user.  This will not work on older browsers.
  *
- * We are using the {@link ng.service:$sce $sce} service here and include the {@link ngSanitize $sanitize}
+ * We are using the {@link ng.service:$sce $sce} service here and includes the {@link ngSanitize $sanitize}
  * module to automatically remove "bad" content like inline event listener (e.g. `<span onclick="...">`).
  * However, as we are using `$sce` the model can still decide to provide unsafe content if it marks
  * that content using the `$sce` service.
@@ -23375,7 +23375,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  * that has been rendered as invalid after it has been validated:
  *
  * <pre>
- * //be sure to include ngAnimate as a module to hook into more
+ * //be sure to includes ngAnimate as a module to hook into more
  * //advanced animations
  * .my-input {
  *   transition:0.5s linear all;
@@ -24583,7 +24583,7 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
  *
  * Animations in ngShow/ngHide work with the show and hide events that are triggered when the directive expression
  * is true and false. This system works like the animation system present with ngClass except that
- * you must also include the !important flag to override the display property
+ * you must also includes the !important flag to override the display property
  * so that you can perform an animation when the element is hidden during the time of the animation.
  *
  * ```css
@@ -25214,7 +25214,7 @@ var ngTranscludeDirective = ngDirective({
       </script>
 
       <a ng-click="currentTpl='/tpl.html'" id="tpl-link">Load inlined template</a>
-      <div id="tpl-content" ng-include src="currentTpl"></div>
+      <div id="tpl-content" ng-includes src="currentTpl"></div>
     </file>
     <file name="protractor.js" type="protractor">
       it('should load template defined inside script tag', function() {

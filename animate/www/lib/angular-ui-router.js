@@ -228,7 +228,7 @@ function map(collection, callback) {
  * @description
  * # ui.router.util sub-module
  *
- * This module is a dependency of other sub-modules. Do not include this module as a dependency
+ * This module is a dependency of other sub-modules. Do not includes this module as a dependency
  * in your angular app (use {@link ui.router} module instead).
  *
  */
@@ -243,7 +243,7 @@ angular.module('ui.router.util', ['ng']);
  * @description
  * # ui.router.router sub-module
  *
- * This module is a dependency of other sub-modules. Do not include this module as a dependency
+ * This module is a dependency of other sub-modules. Do not includes this module as a dependency
  * in your angular app (use {@link ui.router} module instead).
  */
 angular.module('ui.router.router', ['ui.router.util']);
@@ -258,7 +258,7 @@ angular.module('ui.router.router', ['ui.router.util']);
  * @description
  * # ui.router.state sub-module
  *
- * This module is a dependency of the main ui.router module. Do not include this module as a dependency
+ * This module is a dependency of the main ui.router module. Do not includes this module as a dependency
  * in your angular app (use {@link ui.router} module instead).
  * 
  */
@@ -281,7 +281,7 @@ angular.module('ui.router.state', ['ui.router.router', 'ui.router.util']);
  * * ui.router - the main "umbrella" module
  * * ui.router.router - 
  * 
- * *You'll need to include **only** this module as the dependency within your angular app.*
+ * *You'll need to includes **only** this module as the dependency within your angular app.*
  * 
  * <pre>
  * <!doctype html>
@@ -3346,7 +3346,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
      * - **`relative`** - {string|object=} -  If `stateOrName` is a relative state reference and `options.relative` is set,
      * .includes will test relative to `options.relative` state (or name).
      *
-     * @returns {boolean} Returns true if it does include the state
+     * @returns {boolean} Returns true if it does includes the state
      */
     $state.includes = function includes(stateOrName, params, options) {
       options = extend({ relative: $state.$current }, options || {});
