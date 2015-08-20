@@ -8,7 +8,7 @@ var port = process.env.PORT || 3000;
 var app = express();
 
 //设置模版路径
-app.set('views','./views');
+app.set('views','./views/pages');
 //模版引擎
 app.set('view engine','jade');
 //端口监听
