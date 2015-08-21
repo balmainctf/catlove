@@ -3,22 +3,22 @@
 
 extends ../layout
 block content
-    .container
-    	.row
-			.col-md-7
-				embed(src="#{movie.flash}",allowFullScreen="true",quality="high",
-					width="720",height="600",align="middle",type="application/x-shock")
-			.col-md-5
-				dl.dl-horizontal
-					dt NAME
-					dd= movie.title
-					dt DAOYAN
-					dd= movie.doctor
-					dt GUOJIA
-					dd= movie.country
-					dt YUYAN
-					dd= movie.language
-					dt RIQI
-					dd= movie.year
-					dt JIANJIE
-					dd= movie.summary
+.container
+    .row
+        .col-md-7
+            embed(src="#{movie.flash}",allowFullScreen="true",quality="high",
+                width="720",height="600",align="middle",type="application/x-shock")
+        .col-md-5
+            dl.dl-horizontal
+                dt NAME
+                dd= movie.title
+                dt DAOYAN
+                dd= movie.doctor
+                dt GUOJIA
+                dd= movie.country
+                dt YUYAN
+                dd= movie.language
+                dt RIQI
+                dd= movie.year
+                dt JIANJIE
+                dd= movie.summary
