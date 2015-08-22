@@ -4,9 +4,16 @@
  */
 var express = require('express');
 var path = require('path');
+
+var mongoose = require('mongoose');
+//
+var Movie = require('./models/movie.js');
 //命令行获取或默认设置
 var port = process.env.PORT || 3000;
 var app = express();
+
+//
+mongoose.connect('mongodb://localhost/movies');
 
 //设置模版路径
 app.set('views','./views/pages');
@@ -25,14 +32,26 @@ console.log('app start on port' + port);
 //get 方式
 //第一个参数是路由名(在url上显示)，，第二个是callback
 app.get('/',function(req,res){
-    res.render('index',{
-        title:'首页'
+    //
+    Movie.fetch(function(err,movies){
+        if(err){
+            console.log(err);
+        }
+        res.render('index',{
+            title:'首页',
+            movies: movies
+        });
     });
 });
 
 app.get('/movie/:id',function(req,res){
-    res.render('detail',{
-        title:'详情页'
+    console.log(req);
+    var id = req.params.id;
+    Movie.findById(id,function(err,movie){
+        res.render('detail',{
+            title: movie.title,
+            movie: movie
+        });
     });
 });
 
