@@ -6,13 +6,16 @@ var express = require('express');
 var path = require('path');
 
 var mongoose = require('mongoose');
-//
+
+//用来替换对象中旧的字段
+var underScore = require('underscore');
+//模型
 var Movie = require('./models/movie.js');
 //命令行获取或默认设置
 var port = process.env.PORT || 3000;
 var app = express();
 
-//
+//连接数据库
 mongoose.connect('mongodb://localhost/movies');
 
 //设置模版路径
@@ -32,7 +35,7 @@ console.log('app start on port' + port);
 //get 方式
 //第一个参数是路由名(在url上显示)，，第二个是callback
 app.get('/',function(req,res){
-    //
+    //查询
     Movie.fetch(function(err,movies){
         if(err){
             console.log(err);
@@ -49,7 +52,7 @@ app.get('/movie/:id',function(req,res){
     var id = req.params.id;
     Movie.findById(id,function(err,movie){
         res.render('detail',{
-            title: movie.title,
+            title: '详情页' + movie.title,
             movie: movie
         });
     });
@@ -57,12 +60,80 @@ app.get('/movie/:id',function(req,res){
 
 app.get('/admin/movie',function(req,res){
     res.render('admin',{
-        title:'后台首页'
+        title:'后台录入页',
+        movie:{
+            title:'',
+            doctor:'',
+            country:'',
+            year:'',
+            poster:'',
+            flash:'',
+            summary:'',
+            language:''
+
+        }
+    });
+});
+
+//admin update
+app.get('/admin/update/:id',function(req,res){
+    var id = req.params.id;
+    if(id){
+        Movie.findById(id,function(err,movie){
+            res.render('admin',{
+                title:'后台更新',
+                movie:movie
+            });
+        });
+    }
+});
+
+//admin post movie
+app.post('/admin/movie/new',function(req,res){
+    var id = req.body.movie._id;
+    var movieObj = req.body.movie;
+    var _movie;
+    //判断是否新更新数据
+    if(id !== 'undefined'){
+        Movie.findById(id, function(err,movie){
+            if(err){
+                console.log(err);
+            }
+
+            _movie = underScore.extend(movie,movieObj);
+
+        });
+    }else{
+        //新添加数据
+        _movie = new Movie({
+            doctor: movieObj.doctor,
+            title:movieObj.title,
+            country:movieObj.country,
+            language: movieObj.language,
+            year:movieObj.year,
+            poster:movieObj.poster,
+            summary: movieObj.summary,
+            flash:movieObj.flash
+        });
+    }
+    _movie.save(function(err,movie){
+        if(err){
+            console.log(err);
+        }
+        //指向跳转
+        res.redirect('/movie/' + movie._id);
     });
 });
 
 app.get('/admin/list',function(req,res){
-    res.render('list',{
-        title:'列表页'
+    //查询
+    Movie.fetch(function(err,movies){
+        if(err){
+            console.log(err);
+        }
+        res.render('index',{
+            title:'影片列表',
+            movies: movies
+        });
     });
 });

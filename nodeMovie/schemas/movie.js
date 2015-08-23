@@ -43,16 +43,10 @@ MovieSchema.pre('save',function(next){
 MovieSchema.statics = {
     //取出数据库中所有的数据
     fetch: function(cb){
-        return this
-            .find({})
-            .sort('meta.updateAt')
-            //执行回调
-            exec(cb)
+        return this.find({}).sort('meta.updateAt').exec(cb);
     },
     findById: function(id,cb){
-        return this
-            .findOne({_id: id})
-            exec(cb)
+        return this.findOne({_id: id}).exec(cb);
     }
 };
 
