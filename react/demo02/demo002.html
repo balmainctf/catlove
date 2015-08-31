@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>JSX语法</title>
+    </head>
+    <body>
+        <div id="test"></div>
+        <div>HTML 语言直接写在 JavaScript 语言之中，不加任何引号，这就是 JSX 的语法，它允许 HTML 与 JavaScript 的混写</div>
+        <script src="../build/react.js"></script>
+        <script src="../build/browser.min.js"></script>
+        <script type="text/babel">
+            var names = ['zhangsan','lisi','wangwu'];
+            var test = document.getElementById('test');
+            var html = <div>
+                    {
+                      names.map(function (name) {
+                        return <div>Hello, {name}!</div>
+                      })
+                    }
+                </div>;
+            React.render(html,test);
+        </script>
+    </body>
+</html>
