@@ -14,17 +14,29 @@
             就是 HelloMessage 组件加入一个 name 属性，值为 John。组件的属性可以在组件类的 this.props 对象上获取，
             比如 name 属性就可以通过 this.props.name 读取
         </div>
+        <div>添加组件属性，有一个地方需要注意，就是 class 属性需要写成 className ，for 属性需要写成 htmlFor ，
+            这是因为 class 和 for 是 JavaScript 的保留字。</div>
         <div id="test"></div>
         <script src="../build/react.js"></script>
         <script src="../build/browser.min.js"></script>
         <script type="text/babel">
             var test = document.getElementById('test');
-            //封装组建
+            //封装组件
             var HelloMessage = React.createClass({
                 render: function() {
-                  return <h1>Hello {this.props.name}</h1>;
+                  console.log(this.props);
+                  //直接写html模版即可，不需要加大挂号
+                  return <div>
+
+                            <h1>Hello {this.props.name}</h1>
+                            <h1>Hello {this.props.age}</h1>
+
+                        </div>;
                 }
               });
+            //组件的最后一个/不要忘记加，否则报错
+            var html = <HelloMessage name="zhangsan" age="30"/>
+            React.render(html,test);
         </script>
     </body>
 </html>
