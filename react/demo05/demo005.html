@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>this.props.children 对象</title>
+    </head>
+    <body>
+        <div>this.props 对象的属性与组件的属性一一对应，但是有一个例外，就是 this.props.children 属性。它表示组件的所有子节点</div>
+        <div>NoteList 组件有两个 span 子节点，它们都可以通过 this.props.children 读取</div>
+        <div>这里需要注意，只有当子节点多余1个时，this.props.children 才是一个数组，否则是不能用 map 方法的</div>
+        <div id="test"></div>
+        <script src="../build/react.js"></script>
+        <script src="../build/browser.min.js"></script>
+        <script type="text/babel">
+            var test = document.getElementById('test');
+            //创建组件
+            var NodeList = React.createClass({
+                render: function(){
+                    console.log(this.props.children);
+                    //map方法最后一个挂号后不要加分号，否则报错！
+                    return <ul>
+                            {
+                                this.props.children.map(function(child){
+                                    return <li>{child}</li>;
+                                })
+                            }
+                        </ul>
+                }
+            });
+            var html = <NodeList>
+                            <span>zhangsan</span>
+                            <span>lisi</span>
+                            <span>wanger</span>
+                            <span>zhaowu</span>
+                        </NodeList>
+            React.render(html,test);
+        </script>
+    </body>
+</html>
