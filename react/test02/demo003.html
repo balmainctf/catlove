@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="test"></div>
+		<script type="text/javascript" src="../bower_components/react/react.min.js"></script>
+		<script type="text/javascript" src="../bower_components/react/JSXTransformer.js"></script>
+		<script type="text/jsx">
+			var test = document.getElementById('test');
+			var Hello = React.createClass({
+				getInitialState: function(){
+					return {
+						clickCount: 0
+					}
+				},
+				handleClick: function(){
+					this.setState({
+						clickCount: this.state.clickCount + 1
+					});
+				},
+				render: function(){
+					return (
+							<div>
+								<button onClick={this.handleClick}>click me!</button>
+								<p>count:{this.state.clickCount}</p>
+							</div>
+						);
+				}
+			});
+
+			var myReact = React.render(<Hello />,test,function(){
+				console.log('is ok!');
+			});
+
+		</script>
+	</body>
+</html>
