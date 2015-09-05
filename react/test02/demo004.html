@@ -11,21 +11,18 @@
 		<script type="text/jsx">
 			var test = document.getElementById('test');
 			var ShowMessage = React.createClass({
+				
 				getInitialState: function(){
 					return {
-						isvisiable: true,
-						message: [
-							'miaomiao',
-							'wangwang'
-						]
+						isvisiable: true
 					}
 				},
 				render: function(){
-					var mesg = this.state.message;
+					console.log(this.props);
 					return (
 							<div>
 								<h1>to child message</h1>
-								<Content message={mesg} />
+								<Content message={this.props.message}/>
 							</div>
 						);
 				}
@@ -56,7 +53,12 @@
 				}
 			});
 
-			var myReact = React.render(<ShowMessage />,test);
+			var message = [
+							'miaomiao',
+							'wangwang'
+						];
+			
+			var myReact = React.render(<ShowMessage message={message}/>,test);
 
 		</script>		
 	</body>
