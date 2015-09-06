@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>官网上的定时器案例</title>
+    </head>
+    <body>
+        <div id="test"></div>
+        <script type="text/javascript" src="../bower_components/react/react.min.js"></script>
+        <script type="text/javascript" src="../bower_components/react/JSXTransformer.js"></script>
+        <script type="text/jsx">
+            var test = document.getElementById('test');
+            var Timer = React.createClass({
+                getInitialState: function(){
+                    return {
+                        secondsElapsed: 0
+                    };
+                },
+                tick: function(){
+                    this.setState({
+                        secondsElapsed: this.state.secondsElapsed + 1
+                    });
+                },
+                //在render方法成功调用之后并且真实的DOM已经被渲染，在这个方法内部可以通过this.getDOMNode()方法访问到真实DOM
+                componentDidMount: function(){
+                    var self = this;
+                    this.interval = setInterval(function(){
+                        self.tick();
+                    },1000);
+                },
+                //销毁componentDidMount方法中添加的所有任务
+                componentWillUnmount: function(){
+                    clearInterval(this.interval);
+                },
+                render: function(){
+                    return (
+                            <div>
+                                    Seconds Elapsed: {this.state.secondsElapsed}
+                            </div>
+                    );
+                }
+            });
+
+            //var myReact = React.render(<Timer />,test);
+
+        </script>
+    </body>
+</html>

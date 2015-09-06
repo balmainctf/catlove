@@ -15,7 +15,7 @@
                     return {
                         inputText: '文本框默认值',
                         radioValue:'A',
-                        checkboxValue: 'AA',
+                        checkboxValue: [],
                         selectValue:'A'
                     }
                 },
@@ -39,10 +39,22 @@
                     });
                 },
                 handleCheckbox: function(e){
-                    console.log(e.target);
+                    //获取这个数值
+                    var checkboxValue = this.state.checkboxValue.slice();
+                    var newVal = e.target.value;
+                    var index = checkboxValue.indexOf(newVal);
+                    console.log(index);
+                    console.log(newVal);
+                    //此方法可以去重以及压栈
+                    if( index == -1 ){
+                        checkboxValue.push( newVal )
+                    }else{
+                        checkboxValue.splice(index,1);
+                    }
+                    console.log(checkboxValue);
                     this.setState({
-                        checkboxValue: e.target.value
-                    });
+                        checkboxValue: checkboxValue
+                    })
                 },
                 render: function(){
                     return (   <form>
@@ -78,7 +90,7 @@
                 render: function(){
                     return (
                             <div>
-                                AA:<input type="checkbox" onChange={this.props.dataCheckbox} name="myCheckbox" defaultChecked value="AA" />
+                                AA:<input type="checkbox" onChange={this.props.dataCheckbox} name="myCheckbox" value="AA" />
                                 BB:<input type="checkbox" onChange={this.props.dataCheckbox} name="myCheckbox" value="BB" />
                                 CC:<input type="checkbox" onChange={this.props.dataCheckbox} name="myCheckbox" value="CC" />
                             </div>
