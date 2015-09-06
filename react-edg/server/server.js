@@ -29,7 +29,7 @@ app.use(express.static('./public'));
 app.use('/', require('./render/render'));
 
 if (require.main === module) {
-    console.log('App started goto - http://0.0.0.0:' + port);
+    console.log('App started goto - http://127.0.0.1:' + port);
     app.listen(port);
 }
 
