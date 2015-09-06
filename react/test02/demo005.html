@@ -11,8 +11,82 @@
 		<script type="text/jsx">
 			var test = document.getElementById('test');
 			var FormApp = React.createClass({
-				
+				getInitialState: function(){
+                    return {
+                        inputText: '文本框默认值',
+                        radioValue:'A',
+                        checkboxValue: 'AA',
+                        selectValue:'A'
+                    }
+                },
+                handleClick: function(e){
+                    e.preventDefault();
+                    //获取真实DOM的两种方式
+                    //var inputText = this.refs.inputText.getDOMNode().value;
+                    //var inputText = React.findDOMNode(this.refs.inputText).value;
+                    var formData = {
+                        myText: this.refs.inputText.getDOMNode().value,
+                        myRadio: this.state.radioValue,
+                        myCheckbox: this.state.checkboxValue,
+                        mySelect: this.refs.mySelect.getDOMNode().value
+                    };
+                    console.log(formData);
+                },
+                handleRadio: function(e){
+                    console.log(e.target);
+                    this.setState({
+                        radioValue: e.target.value
+                    });
+                },
+                handleCheckbox: function(e){
+                    console.log(e.target);
+                    this.setState({
+                        checkboxValue: e.target.value
+                    });
+                },
+                render: function(){
+                    return (   <form>
+                                    <input type="text" ref="inputText" defaultValue={this.state.inputText}/>
+                                    <MyRadio dataRadio={this.handleRadio} />
+                                    <MyCheckbox dataCheckbox={this.handleCheckbox} />
+                                    <p>选项</p>
+                                    <select defaultValue={this.state.selectValue} ref="mySelect">
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                    </select>
+                                    <input type="button" onClick={this.handleClick} value="点击" />
+                                </form>
+                            );
+                }
 			});
+
+            //将radio checkbox select做成组件
+            var MyRadio = React.createClass({
+                render: function(){
+                    return <div>
+                        A:<input type="radio" onChange={this.props.dataRadio} name="myRadio" defaultChecked value="A" />
+                        B:<input type="radio" onChange={this.props.dataRadio} name="myRadio" value="B" />
+                        C:<input type="radio" onChange={this.props.dataRadio} name="myRadio" value="C" />
+                    </div>
+                }
+            });
+
+            var MyCheckbox = React.createClass({
+                render: function(){
+                    return (
+                            <div>
+                                AA:<input type="checkbox" onChange={this.props.dataCheckbox} name="myCheckbox" defaultChecked value="AA" />
+                                BB:<input type="checkbox" onChange={this.props.dataCheckbox} name="myCheckbox" value="BB" />
+                                CC:<input type="checkbox" onChange={this.props.dataCheckbox} name="myCheckbox" value="CC" />
+                            </div>
+                    );
+                }
+            });
+
+            var myReact = React.render(<FormApp />,test);
 		</script>		
 	</body>
 </html>
