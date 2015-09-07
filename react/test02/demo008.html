@@ -2,7 +2,7 @@
 <html>
     <head lang="en">
         <meta charset="UTF-8">
-        <title>生命周期解读(一)</title>
+        <title>生命周期（二）</title>
     </head>
     <body>
         <div id="test"></div>
@@ -22,12 +22,6 @@
                     return {}
                 },
                 componentWillMount: function(){
-                    var self = this;
-                    this.timer = setInterval(function(){
-                        self .setState({
-                            count: self .state.count + 1
-                        });
-                    },1000);
                     console.log('componentWillMount');
                 },
                 componentDidMount: function(){
@@ -35,11 +29,34 @@
                 },
                 componentWillUnmount: function(){
                     console.log('componentWillUnmount');
-                    clearInterval(this.timer);
                 },
                 handleClick: function(){
                     //卸载组件
                     React.unmountComponentAtNode(test);
+                },
+                updateClick: function(){
+                    this.setState({
+                        count: this.state.count + 1
+                    });
+                },
+                //渲染新的props和state,如果不需要则返回false就可以了
+                //返回false则告诉react跳过调用render方法，以及位于render前后的钩子函数:componentWillUpdate和componentDidUpdate
+                shouldComponentUpdate: function(nextProp,nextState){
+                    console.log(nextState);
+                    console.log('shouldComponentUpdate');
+                    if(nextState.count>10){
+                        return false;
+                    }
+                    return true;
+                },
+                //已经接收到新的props和state,进行渲染之前，同componentWillUnmount
+                componentWillUpdate:function(nextProp,nextState){
+                    console.log(nextState);
+                    console.log('componentWillUpdate');
+                },
+                //已经render后的操作,同componentDidMount
+                componentDidUpdate:function(){
+                    console.log('componentDidUpdate');
                 },
                 render: function(){
                     console.log('render');
@@ -48,17 +65,26 @@
                                 <p>组件的生命周期,在Log中可以清晰的看到</p>
                                 <p>{this.state.count}</p>
                                 <input type="button" onClick={this.handleClick} value="卸载组件" />
-                                <Footer />
+                                <input type="button" value="更新组件" onClick={this.updateClick} />
+                                <Submessage count={this.state.count}/>
                             </div>
                     );
                 }
             });
 
-            var Footer = React.createClass({
-                render: function(){
+            var Submessage = React.createClass({
+                componentWillReceiveProps:function(nextProp){
+                    console.log('子组件将要获得prop');
+
+                },
+                shouldComponentUpdate:function(nextProp,nextState){
+                    if(nextProp.count> 5) return false;
+                    return true;
+                },
+                render:function(){
                     return (
-                            <div>这个是一个组件</div>
-                    );
+                            <h3>当前计数是：{this.props.count}</h3>
+                    )
                 }
             });
 

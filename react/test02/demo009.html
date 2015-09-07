@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>mixin</title>
+    </head>
+    <body>
+        <div id="test"></div>
+        <script type="text/javascript" src="../bower_components/react/react.min.js"></script>
+        <script type="text/javascript" src="../bower_components/react/JSXTransformer.js"></script>
+        <script type="text/jsx">
+            var test = document.getElementById('test');
+            //mixin
+            var CommonMixin = {
+                componentWillMount: function(){
+                    this.oldState = [];
+                },
+                componentWillUpdate: function(nextProps,nextState){
+                    this.oldState.push(nextState);
+                },
+                previousState: function(){
+                    var index = this.oldState.length-1;
+                    return (index == -1)?{}:this.oldState[index];
+                }
+            };
+            var MessageBox = React.createClass({
+                mixins: [CommonMixin],
+                getInitialState: function(){
+                    return {
+                        count: 0
+                    }
+                },
+                doUpdate: function(){
+                    console.log('上次计数是'+this.previousState().count);
+                    this.setState({
+                        count: this.state.count + 1
+                    });
+                },
+                render: function(){
+                    return (
+                            <div>
+                                    <p>目前的数据是:{this.state.count}</p>
+                                    <input type="button" value="点击加一" onClick={this.doUpdate} />
+                                    <Footer message={this.state.count} />
+                            </div>
+                    );
+                }
+
+            });
+
+            var Footer = React.createClass({
+                mixins: [CommonMixin],
+                getInitialState: function(){
+                    return {
+                        count: 0
+                    }
+                },
+                componentWillReceiveProps: function(nextProps){
+                    console.log('接收父组件数据');
+                    console.log(nextProps);
+                    this.setState({
+                        count: this.props.message * 2
+                    });
+                },
+                render: function(){
+                    return (
+                            <div>
+                                    <p>子组件获取父组件数据并乘2</p>
+                                    <p>{this.state.count}</p>
+                            </div>
+                    );
+                }
+            });
+
+            var myReact = React.render(<MessageBox />,test);
+        </script>
+    </body>
+</html>
