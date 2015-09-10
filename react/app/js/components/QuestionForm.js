@@ -5,8 +5,11 @@ var React = require('react');
 
 module.exports = React.createClass({
     render: function(){
+        var styleObj = {
+            display: this.props.formStyle?'block':'none'
+        }
         return (
-            <form name="addQuestion" className="clearfix">
+            <form name="addQuestion" className="clearfix" style={styleObj}>
                 <div className="form-group">
                     <label htmlFor="qtitle">问题</label>
                     <input type="text" className="form-control" id="qtitle" placeholder="您的问题的标题" />
