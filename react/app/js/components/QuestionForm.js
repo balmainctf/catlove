@@ -4,6 +4,12 @@
 var React = require('react');
 
 module.exports = React.createClass({
+    cancelData: function(){
+        this.props.formStyle = false;
+    },
+    submitData: function(){
+
+    },
     render: function(){
         var styleObj = {
             display: this.props.formStyle?'block':'none'
@@ -15,8 +21,8 @@ module.exports = React.createClass({
                     <input type="text" className="form-control" id="qtitle" placeholder="您的问题的标题" />
                 </div>
                 <textarea className="form-control" rows="3" placeholder="问题的描述"></textarea>
-                <button className="btn btn-success pull-right">确认</button>
-                <button className="btn btn-default pull-right">取消</button>
+                <button className="btn btn-success pull-right" onClick={this.submitData}>确认</button>
+                <button className="btn btn-default pull-right" onClick={this.cancelData}>取消</button>
             </form>
         );
     }

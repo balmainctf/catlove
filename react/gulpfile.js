@@ -25,16 +25,16 @@ gulp.task('browserify',function(){
 		transform: 'reactify'
 	}))
 	.pipe(gulp.dest('./dist/js'))
-	.pipe(rename('main.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/js'));
+	//.pipe(rename('main.min.js'))
+    //.pipe(uglify())
+    //.pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('ugCss',function(){
 	gulp.src('./app/css/*.css')
 	.pipe(rename('style.min.css'))
-	.pipe(minify())
-	.pipe(gulp.dest('./dist/css'));
+	//.pipe(minify())
+	//.pipe(gulp.dest('./dist/css'));
 });
 
 //reload
