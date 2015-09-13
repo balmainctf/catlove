@@ -24,6 +24,14 @@ module.exports = React.createClass({
           formDisplayed: false
         };
     },
+    addQuestionForm: function(newQuestionData){
+        newQuestionData.key = this.state.questionData.length + 1;
+        var data = this.state.questionData.concat(newQuestionData);
+        data = this.sortData(data);
+        this.setState({
+            questionData: data
+        });
+    },
     sortData: function(data){
         data.sort(function(a,b){
             return b.voteCount - a.voteCount;
@@ -62,7 +70,7 @@ module.exports = React.createClass({
                     </div>
                 </div>
                 <div className="main container">
-                    <QuestionForm formStyle={this.state.formDisplayed}/>
+                    <QuestionForm formStyle={this.state.formDisplayed} toggle={this.toggleClick} addQuestionForm={this.addQuestionForm}/>
                     <QuestionList questionData={questionData}  voteClick={this.onVoteClick}/>
                 </div>
             </div>

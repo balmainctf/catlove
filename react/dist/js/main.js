@@ -39,6 +39,14 @@ module.exports = React.createClass({displayName: "exports",
           formDisplayed: false
         };
     },
+    addQuestionForm: function(newQuestionData){
+        newQuestionData.key = this.state.questionData.length + 1;
+        var data = this.state.questionData.concat(newQuestionData);
+        data = this.sortData(data);
+        this.setState({
+            questionData: data
+        });
+    },
     sortData: function(data){
         data.sort(function(a,b){
             return b.voteCount - a.voteCount;
@@ -77,7 +85,7 @@ module.exports = React.createClass({displayName: "exports",
                     )
                 ), 
                 React.createElement("div", {className: "main container"}, 
-                    React.createElement(QuestionForm, {formStyle: this.state.formDisplayed}), 
+                    React.createElement(QuestionForm, {formStyle: this.state.formDisplayed, toggle: this.toggleClick, addQuestionForm: this.addQuestionForm}), 
                     React.createElement(QuestionList, {questionData: questionData, voteClick: this.onVoteClick})
                 )
             )
@@ -92,25 +100,35 @@ module.exports = React.createClass({displayName: "exports",
 var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
-    cancelData: function(){
+    submitData: function(e){
+        e.preventDefault();
+        if(!this.refs.addTitle.getDOMNode().value) return;
         
-    },
-    submitData: function(){
+        var formData = {
+            title: this.refs.addTitle.getDOMNode().value,
+            content: this.refs.addContent.getDOMNode().value,
+            voteCount: 0
+        };
+        //console.log(formData);
+        
+        this.props.addQuestionForm(formData);
 
+        this.refs.addQuestion.getDOMNode().reset();
+        
     },
     render: function(){
         var styleObj = {
             display: this.props.formStyle?'block':'none'
         }
         return (
-            React.createElement("form", {name: "addQuestion", className: "clearfix", style: styleObj}, 
+            React.createElement("form", {ref: "addQuestion", name: "addQuestion", className: "clearfix", style: styleObj}, 
                 React.createElement("div", {className: "form-group"}, 
                     React.createElement("label", {htmlFor: "qtitle"}, "问题"), 
-                    React.createElement("input", {type: "text", className: "form-control", id: "qtitle", placeholder: "您的问题的标题"})
+                    React.createElement("input", {type: "text", ref: "addTitle", className: "form-control", id: "qtitle", placeholder: "您的问题的标题"})
                 ), 
-                React.createElement("textarea", {className: "form-control", rows: "3", placeholder: "问题的描述"}), 
+                React.createElement("textarea", {className: "form-control", ref: "addContent", rows: "3", placeholder: "问题的描述"}), 
                 React.createElement("button", {className: "btn btn-success pull-right", onClick: this.submitData}, "确认"), 
-                React.createElement("button", {className: "btn btn-default pull-right", onClick: this.cancelData}, "取消")
+                React.createElement("button", {className: "btn btn-default pull-right", onClick: this.props.toggle}, "取消")
             )
         );
     }
