@@ -10,7 +10,7 @@ function filterChar(html){
 
 	var listData = [];
 
-	goodsList.each(function(item){
+	goodsList.each(function(){
 		var li = $(this).children();
 		var imgDom = li.children().eq(0).find('img');
 		var href = imgDom.parent().attr('href');
@@ -18,8 +18,8 @@ function filterChar(html){
 
 		var temImg = li.children().eq(1).find('li');
 		var temImgData = [];
-		temImg.each(function(ii){
-			var d = $(this)
+		temImg.each(function(){
+			var d = $(this);
 			var h = d.find('img').attr('src');
 			temImgData.push(h);
 		});

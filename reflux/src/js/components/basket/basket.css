@@ -1,0 +1,65 @@
+.appBasket {
+  float: right;
+  border: 1px solid #F1F1F1;
+  border-right: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  box-shadow: 1px 1px 2px #DDD;
+  padding: 0 10px;
+  background-color: #FFF;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 0 0 5px 5px;
+}
+.appBasket--is-empty .appBasket-nrItems, .appBasket--is-empty .appBasket-total {
+  opacity: 0;
+  height: 0;
+}
+.appBasket-nrItems, .appBasket-total {
+  opacity: 1;
+  -webkit-transition: opacity 0.25s ease-in;
+  transition: opacity 0.25s ease-in;
+  height: auto;
+  letter-spacing: 1;
+  margin-top: 5px;
+  display: inline-block;
+  margin-right: 18px;
+}
+.appBasket-nrItems {
+  padding: 3px 7px;
+  color: #FFF;
+  background-color: #FB4065;
+}
+.appBasket-qty {
+  display: inline-block;
+  color: #FB4065;
+  margin: 0 10px;
+  letter-spacing: 1px;
+}
+.appBasket-label {
+  padding-top: 7px;
+  font-weight: bold;
+}
+.appBasket-total {
+  padding: 3px 7px;
+  background-color: #2CBB9C;
+  color: #FFF;
+}
+.appBasket--is-empty .basketList {
+  padding: 10px 0 0 0;
+}
+.basketList {
+  padding: 10px 0;
+}
+.basketList >li {
+  padding: 0 0 5px;
+  border-top: 1px dotted #DDD;
+  font-size: 10px;
+}
+.appBasket-qty, .appBasket-itemDetails {
+  padding-top: 10px;
+}
+.appBasket-controls {
+  margin-top: 5px;
+}
+.appBasket-controls button {
+  box-shadow: 0 0 3px #666;
+}

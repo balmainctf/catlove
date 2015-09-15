@@ -1,0 +1,59 @@
+/* ============================
+   Base styles
+=============================== */
+html, body {
+  height: 100%;
+  max-height: 100%;
+}
+
+body {
+  font-family : $font1;
+  font-size: $theme-base-font-size;
+  line-height: $theme-base-line-height;
+}
+
+* {
+  @include box-sizing(border-box);
+}
+*:before,
+*:after {
+  @include box-sizing(border-box);
+}
+
+// Lists
+// -------------------------
+.plain-list {
+  @extend %list-reset;
+}
+
+// .inline-list (foundation)
+.inline-list > li {
+  margin-left: $theme-base-spacing;
+}
+
+ul {
+  margin-top: 0.5em;
+  list-style-position: inside;
+  list-style-type: square;
+}
+
+// Links
+// -------------------------
+a {
+  color: $color-link;
+  text-decoration: none;
+  text-shadow: none;
+  &:hover,
+  &:focus {
+    color: $color-link-hover;
+  }
+  transition: color 0.25s ease-in;
+}
+
+// Headings
+// -------------------------
+h1, h2, h3, h4, h5, h6 {
+  text-align:left;
+  font-family : $font2;
+  letter-spacing:0;
+}
