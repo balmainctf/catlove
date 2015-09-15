@@ -66,8 +66,12 @@ http.get(url,function(res){
 
 		var data = 'var data = ' + JSON.stringify(json);
 
-		fs.writeFile('./data.js', data, function (e) {
-			console.log('ok');
+		fs.writeFile('./data.js', data, function (err,data) {
+			if(err){
+				console.log(err);
+			}else{
+				console.log(data);
+			}
 		});
 	});
 
