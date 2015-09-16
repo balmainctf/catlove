@@ -2,14 +2,13 @@
  *
  * Created by Administrator on 2015/9/16.
  */
-var webpack = require('webpack');
 //处理公用部分的js,并合并成一个common.js
 //var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
-
+'use strict';
 module.exports = {
     entry: './js/app.js',
     output:{
-        path: './build',
+        path: __dirname +'./build',
         filename: 'build.js'
     },
     module: {

@@ -11,6 +11,7 @@
  */
 
 // This file bootstraps the entire application.
+// http://wwsun.me/posts/getting-to-know-flux.html
 
 var ChatApp = require('./components/ChatApp.react');
 var ChatExampleData = require('./ChatExampleData');
