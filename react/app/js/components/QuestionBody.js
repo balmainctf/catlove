@@ -10,19 +10,26 @@ var QuestionList = require('./QuestionList.js');
 module.exports = React.createClass({
     getInitialState: function(){
         return {
-          questionData:[{
-              key: 1,
-              title: '我的战友在前线打仗，而我却还在这儿修改BUG',
-              content: '与其当初战死沙场，也不会落得如此下场',
-              voteCount: 10
-          },{
-              key: 2,
-              title: '见与不见',
-              content: '你见，或者不见我，我就在那里，不悲不喜',
-              voteCount: 17
-          }],
+          questionData:[],
           formDisplayed: false
         };
+    },
+    componentDidMount: function(){
+        $.ajax({
+            url:'/data.json?'+ ( new Date()).getTime().toString(),
+            type:'get',
+            dataType: "json",
+            success:function(data){
+                console.log(data);
+                var result = data.return;
+                this.setState({
+                    questionData: result
+                });
+            }.bind(this),
+            error: function(e){
+                console.log(e);
+            }
+        });
     },
     addQuestionForm: function(newQuestionData){
         newQuestionData.key = this.state.questionData.length + 1;
