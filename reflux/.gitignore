@@ -1,9 +1,0 @@
-.DS_Store
-node_modules
-npm-debug.log
-app/css
-app/js
-app/index.html
-npm-debug.log
-
-app/build/build.min.js
