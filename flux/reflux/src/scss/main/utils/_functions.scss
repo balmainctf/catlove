@@ -1,0 +1,11 @@
+/* ============================
+   Functions
+=============================== */
+
+@function black($opacity) {
+  @return rgba(black, $opacity)
+}
+
+@function white($opacity) {
+  @return rgba(white, $opacity)
+}

@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+// ----------------------
+// Settings
+// ----------------------
+
+// CSS namespace
+$namespace: "app";
+
+// Fonts
+$font1: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font2: "Helvetica Neue", Helvetica, Arial, sans-serif;
+//$font2: "Courier New", Courier, monospace;
+
+// Type / fonts
+// -------------------------
+$theme-base-font-size: 87.5%; // 14px
+$theme-rem-base : 14;
+$theme-base-line-height: 1.5;
+
+// = Colors
+// -----------------------------
+$color1: #85E5F0;
+$color2: #333;
+
+// link
+$color-link: #FB4065;
+$color-link-hover: #DB0A34;
+
+//  Grid
+// -----------------------------
+$theme-base-spacing : 20px;
+
+// Responsive grid variables
+// -------------------------
+$grid-columns : 12;
+$grid-debug-mode : false;
+$page-max-width : 985px;
+$grid-gutter : 0.83333rem;
+
+// Breakpoint units :
+// -------------------------
+$bp-small : 24em;
+$bp-medium : 40.063em;
+$bp-medium-2 : 48em;
+$bp-large : 64.063em;
+$bp-xlarge : 90.063em;
+$bp-xlarge : 120.063em;

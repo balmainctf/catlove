@@ -1,0 +1,38 @@
+/* ============================
+   Helpers
+=============================== */
+.hidden {
+    display: none;
+}
+
+// visually hidden text
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// Contain floats: nicolasgallagher.com/micro-clearfix-hack/
+.clearfix{
+  @extend %clearfix;
+}
+
+.clear {
+  clear: both;
+}
+
+// Responsive images (ensure images don't scale beyond their parents)
+.img-responsive {
+  @include img-responsive();
+}
+
+.float-left   { float: left; }
+.float-right   { float: right; }
+
+.truncate {
+  display: block;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

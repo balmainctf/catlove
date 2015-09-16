@@ -1,0 +1,25 @@
+/* ============================
+    Page layout
+=============================== */
+
+// container - used to set width of page and also used to set responsive widths
+// -------------------------
+.container {
+  margin: 0 auto;
+  width: 90%;
+  min-height: 100%;
+  @extend %clearfix;
+  position:relative;
+
+  @media screen and (min-width: $bp-medium) {
+    max-width: $page-max-width;
+  }
+}
+
+.fixed-container {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:10;
+  width:100%;
+}
