@@ -22,7 +22,7 @@ var ChatServerActionCreators = require('../actions/ChatServerActionCreators');
 module.exports = {
 
   getAllMessages: function() {
-    // simulate retrieving data from a database
+    //获取本地localstorage
     var rawMessages = JSON.parse(localStorage.getItem('messages'));
 
     // simulate success callback

@@ -14,12 +14,14 @@
 // http://wwsun.me/posts/getting-to-know-flux.html
 
 var ChatApp = require('./components/ChatApp.react');
+//加载数据
 var ChatExampleData = require('./ChatExampleData');
 var ChatWebAPIUtils = require('./utils/ChatWebAPIUtils');
 var React = require('react');
 window.React = React; // export for http://fb.me/react-devtools
 
-ChatExampleData.init(); // load example data into localstorage
+//将临时数据存到本地localstorage
+ChatExampleData.init();
 
 ChatWebAPIUtils.getAllMessages();
 

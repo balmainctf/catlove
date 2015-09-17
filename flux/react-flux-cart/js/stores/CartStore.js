@@ -70,6 +70,7 @@ var CartStore = _.extend({}, EventEmitter.prototype, {
 
 // Register callback with AppDispatcher
 AppDispatcher.register(function(payload) {
+    console.log(payload);
   var action = payload.action;
   var text;
 

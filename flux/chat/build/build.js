@@ -57,6 +57,7 @@
 	 */
 
 	// This file bootstraps the entire application.
+	// http://wwsun.me/posts/getting-to-know-flux.html
 
 	var ChatApp = __webpack_require__(1);
 	var ChatExampleData = __webpack_require__(171);
