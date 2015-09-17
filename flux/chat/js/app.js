@@ -12,6 +12,10 @@
 
 // This file bootstraps the entire application.
 // http://wwsun.me/posts/getting-to-know-flux.html
+// 
+// http://zhuanlan.zhihu.com/FrontendMagazine/19900243
+// http://www.react-china.org/t/flux/1797
+// https://hulufei.gitbooks.io/react-tutorial/content/flux.html
 
 var ChatApp = require('./components/ChatApp.react');
 //加载数据
