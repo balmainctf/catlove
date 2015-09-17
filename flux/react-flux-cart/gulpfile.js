@@ -8,7 +8,7 @@ var config = require('./webpack.config');
 var port = process.env.port || 5000;
 
 gulp.task('webpack',function(){
-    gulp.src('./js/app..js')
+    gulp.src('./js/app.js')
     .pipe(webpack(config))
     .pipe(gulp.dest('./build'));
 });
