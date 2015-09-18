@@ -7,6 +7,7 @@ let _ = require('lodash');
 let BasketStore = Reflux.createStore({
 
   init() {
+      console.log(actions);
       this.data = {
         basketItems: []
       };

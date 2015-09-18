@@ -17,6 +17,8 @@ let App = React.createClass({
 
   render: function () {
     let name = this.getRoutes().slice(0).reverse()[0].name;
+    console.log(this.getRoutes());
+    console.log(name);
 
     return (
       <div>

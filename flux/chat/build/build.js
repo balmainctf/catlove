@@ -58,14 +58,20 @@
 
 	// This file bootstraps the entire application.
 	// http://wwsun.me/posts/getting-to-know-flux.html
+	// 
+	// http://zhuanlan.zhihu.com/FrontendMagazine/19900243
+	// http://www.react-china.org/t/flux/1797
+	// https://hulufei.gitbooks.io/react-tutorial/content/flux.html
 
 	var ChatApp = __webpack_require__(1);
+	//加载数据
 	var ChatExampleData = __webpack_require__(171);
 	var ChatWebAPIUtils = __webpack_require__(12);
 	var React = __webpack_require__(15);
 	window.React = React; // export for http://fb.me/react-devtools
 
-	ChatExampleData.init(); // load example data into localstorage
+	//将临时数据存到本地localstorage
+	ChatExampleData.init();
 
 	ChatWebAPIUtils.getAllMessages();
 
@@ -844,7 +850,7 @@
 	module.exports = {
 
 	  getAllMessages: function() {
-	    // simulate retrieving data from a database
+	    //获取本地localstorage
 	    var rawMessages = JSON.parse(localStorage.getItem('messages'));
 
 	    // simulate success callback
