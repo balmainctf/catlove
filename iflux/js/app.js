@@ -17,20 +17,21 @@ var FormApp = React.createClass({
     getDefaultProps() {
 
     },
-    getInitialState: function(){
-        return {};
-
-    },
     componentDidMount: function(){
         msg.emit('getName');
     },
     render: function(){
-        var store = appStore.data();
+        var store = this.state;
         return (
             <div>
                 <input type="text" ref="myName"/>
                 <input type="button" value="点击" onClick={this.handleClick}/>
-                <div>{store.get('name')}</div>
+                <div>{store.getIn(['json','result','name'])}</div>
+
+                <div>{store.getIn(['json','result','age'])}</div>
+
+                <div>{store.getIn(['json','result','list'])}</div>
+
             </div>
         )
     }

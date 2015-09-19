@@ -7,22 +7,20 @@ var {msg, mixins,Store} = require('iflux');
 var WebApi = require('./webapi.js');
 
 var appStore = module.exports = Store({
-    name:''
+    json:{}
 });
 
 msg.on('getName',() => {
     WebApi.getName().done((data) => {
-        console.log(data);
         appStore.cursor().withMutations(cursor => {
-            cursor.update('name', () => Immutable.fromJS(data));
+            cursor.update('json', () => Immutable.fromJS(data));
+
         });
     });
 }).on('setName',(data) => {
-    console.log(data);
     WebApi.setName(data).done(e => {
-        console.log(e);
         appStore.cursor().withMutations(cursor => {
-            cursor.update('name', () => Immutable.fromJS(e));
+            cursor.update('json', () => Immutable.fromJS(e));
         });
     });
 });

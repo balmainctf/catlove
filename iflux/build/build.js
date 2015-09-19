@@ -63,20 +63,21 @@
 	    getDefaultProps:function() {
 
 	    },
-	    getInitialState: function(){
-	        return {};
-
-	    },
 	    componentDidMount: function(){
 	        msg.emit('getName');
 	    },
 	    render: function(){
-	        var store = appStore.data();
+	        var store = this.state;
 	        return (
 	            React.createElement("div", null, 
 	                React.createElement("input", {type: "text", ref: "myName"}), 
 	                React.createElement("input", {type: "button", value: "点击", onClick: this.handleClick}), 
-	                React.createElement("div", null, store.get('name'))
+	                React.createElement("div", null, store.getIn(['json','result','name'])), 
+
+	                React.createElement("div", null, store.getIn(['json','result','age'])), 
+
+	                React.createElement("div", null, store.getIn(['json','result','list']))
+
 	            )
 	        )
 	    }
@@ -20506,10 +20507,12 @@
 	 * @param obj
 	 */
 	function Store(data) {
-	  if (!(this instanceof Store)) return new Store(data);
 
+	  if (!(this instanceof Store)) return new Store(data);
+	    console.log(data);
 	  //当前应用的数据
 	  this.data = Immutable.fromJS(data || {});
+	    console.log(this.data);
 
 	  //缓存初始状态的值
 	  this.init = this.data;
@@ -26988,7 +26991,7 @@
 	      // 每次加载的时候就恢复到初始状态
 	      if (reset) {
 	        store.reset();
-	      }     
+	      }
 	      return store.data();
 	    },
 
@@ -27021,22 +27024,20 @@
 	var WebApi = __webpack_require__(167);
 
 	var appStore = module.exports = Store({
-	    name:''
+	    json:{}
 	});
 
 	msg.on('getName',function()  {
 	    WebApi.getName().done(function(data)  {
-	        console.log(data);
 	        appStore.cursor().withMutations(function(cursor)  {
-	            cursor.update('name', function()  {return Immutable.fromJS(data);});
+	            cursor.update('json', function()  {return Immutable.fromJS(data);});
+
 	        });
 	    });
 	}).on('setName',function(data)  {
-	    console.log(data);
 	    WebApi.setName(data).done(function(e)  {
-	        console.log(e);
 	        appStore.cursor().withMutations(function(cursor)  {
-	            cursor.update('name', function()  {return Immutable.fromJS(e);});
+	            cursor.update('json', function()  {return Immutable.fromJS(e);});
 	        });
 	    });
 	});

@@ -1,5 +1,7 @@
 {
   "result":{
-    "name":"更新后的名字"
+    "name":"更新后的名字",
+    "age":20,
+    "list":["node","asp"]
   }
 }
