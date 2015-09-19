@@ -22,7 +22,7 @@ var FormApp = React.createClass({
 
     },
     componentDidMount: function(){
-
+        msg.emit('getName');
     },
     render: function(){
         var store = appStore.data();
