@@ -1,0 +1,20 @@
+{
+  "name": "iflux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "iflux": "^1.1.10"
+  },
+  "devDependencies": {
+    "gulp-connect": "^2.2.0",
+    "immutable": "^3.7.5",
+    "jquery": "^2.1.4",
+    "jsx-loader": "^0.13.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
