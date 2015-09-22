@@ -20509,10 +20509,8 @@
 	function Store(data) {
 
 	  if (!(this instanceof Store)) return new Store(data);
-	    console.log(data);
 	  //当前应用的数据
 	  this.data = Immutable.fromJS(data || {});
-	    console.log(this.data);
 
 	  //缓存初始状态的值
 	  this.init = this.data;
@@ -20593,6 +20591,7 @@
 	 * @param path 数据的路径
 	 */
 	 Store.prototype.reset = function(path) {
+	     console.log(path);
 	   if (path) {
 	     var isArray = _.isArray(path);
 	     var initVal = this.init[isArray ? 'getIn' : 'get'](path);
@@ -27028,17 +27027,24 @@
 	});
 
 	msg.on('getName',function()  {
-	    WebApi.getName().done(function(data)  {
-	        appStore.cursor().withMutations(function(cursor)  {
-	            cursor.update('json', function()  {return Immutable.fromJS(data);});
-
-	        });
+	    //WebApi.getName().done((data) => {
+	    //    //appStore.cursor().withMutations(cursor => {
+	    //    //    cursor.update('json', () => Immutable.fromJS(data));
+	    //    //
+	    //    //});
+	    //    appStore.cursor().update('json', () => Immutable.fromJS(data));
+	    //});
+	    WebApi.getName().then(function(data){
+	        appStore.cursor().update('json', function()  {return Immutable.fromJS(data);});
+	    }).catch(function(e){
+	        console.log(e);
 	    });
 	}).on('setName',function(data)  {
 	    WebApi.setName(data).done(function(e)  {
-	        appStore.cursor().withMutations(function(cursor)  {
-	            cursor.update('json', function()  {return Immutable.fromJS(e);});
-	        });
+	        //appStore.cursor().withMutations(cursor => {
+	        //    cursor.update('json', () => Immutable.fromJS(e));
+	        //});
+	        appStore.cursor().update('json', function()  {return Immutable.fromJS(e);});
 	    });
 	});
 
@@ -27053,19 +27059,32 @@
 
 	var getData = module.exports = {};
 
+	var myAjax = __webpack_require__(169);
+
+
 	//请求当前的名字
 	getData.getName = function(){
-	    //设置延时对象
-	    var deferred = $.Deferred();
-	    $.ajax({
-	        type: 'GET',
+	    var data = {
+	        type: 'get',
 	        url: './js/data.json'
-	    }).done(function(jsonData){
-	        deferred.resolve(jsonData);
-	    }).fail(function (e){
-	        deferred.reject(e);
+	    };
+	    return myAjax.ajax(data).then(function(res){
+	        console.log(res);
+	        return res;
+	    },function(e){
+	        throw e;
 	    });
-	    return deferred.promise();
+	    //设置延时对象
+	    //var deferred = $.Deferred();
+	    //$.ajax({
+	    //    type: 'GET',
+	    //    url: './js/data.json'
+	    //}).done(function(jsonData){
+	    //    deferred.resolve(jsonData);
+	    //}).fail(function (e){
+	    //    deferred.reject(e);
+	    //});
+	    //return deferred.promise();
 	}
 
 	//按钮点击后，更新当前名字
@@ -36298,6 +36317,35 @@
 
 	}));
 
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2015/9/22.
+	 */
+	var $ = __webpack_require__(168);
+	var myAjax = {
+	    ajax:function(opt){
+	        //定义promise对象
+	        var promise = new Promise(function(resolve, reject){
+	            $.ajax({
+	                type: opt.type || 'get',
+	                url: opt.url,
+	                data: opt.data || {},
+	                dataType: 'json'
+	            }).done(function(jsonData){
+	                resolve(jsonData);
+	            }).fail(function (e){
+	                reject(e);
+	            });
+	        });
+	        return promise;
+	    }
+	};
+
+	module.exports = myAjax;
 
 /***/ }
 /******/ ]);
