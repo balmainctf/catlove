@@ -3,17 +3,18 @@
  * immutable test 不可变数据集合
  */
 var immutable = require('immutable');
+var Cursor = require('immutable/contrib/cursor');
 
 //fromJs() 生成不可变对象
-/*var data = {a: {b: [10, 20, 30]}, c: 40};
-var map1 = immutable.fromJS(data);
-console.log(map1);//Map { "a": Map { "b": List [ 10, 20, 30 ] }, "c": 40 }
-console.log(map1.get('a'));//Map { "b": List [ 10, 20, 30 ] }
-//改变c属性的值
-var map2 = map1.set('c',55);
-console.log(map1.get('c'));//44 原先map1属性没有变化
-console.log(map2.get('c'));//55
-console.log(map2.get('a'));//Map { "b": List [ 10, 20, 30 ] }*/
+//var data = {a: {b: [10, 20, 30]}, c: 40};
+//var map1 = immutable.fromJS(data);
+//console.log(map1);//Map { "a": Map { "b": List [ 10, 20, 30 ] }, "c": 40 }
+//console.log(map1.get('a'));//Map { "b": List [ 10, 20, 30 ] }
+////改变c属性的值
+//var map2 = map1.set('c',55);
+//console.log(map1.get('c'));//44 原先map1属性没有变化
+//console.log(map2.get('c'));//55
+//console.log(map2.get('a'));//Map { "b": List [ 10, 20, 30 ] }
 
 
 //is() 对象引用类型的比较
