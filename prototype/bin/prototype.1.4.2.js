@@ -15,7 +15,7 @@ prototype框架最早是出于方便Ruby开发人员进行JavaScript开发所构
 /*----------------------------------------------------------------------------------------------------*/
  
  
-/*
+/**
 定义prototype对象，告知版本信息，有利于程序的自动检测
 ScriptFragment是正则表达式，用于捕获字符串中的<script>标记及其中的内容
 emptyFunction:空函数
@@ -37,7 +37,7 @@ var Prototype = {
   K: function(x) {return x}
 }
  
-/*
+/**
 定义创建类的模式，使用此模式创建的类能够实现构造函数
 其中initialize是一个抽象方法，apply使得能对其保持参数。
 如果直接调用this.initialize(arguments)，则整个参数数组作为了一个参数。
@@ -53,7 +53,7 @@ var Class = {
 //表示命名空间或者抽象类的东西，使代码逻辑更加清楚
 var Abstract = new Object();
  
-/*
+/**
 将source的所有属性复制到destination
 例如：
 var a={};
@@ -79,7 +79,7 @@ Object.prototype.extend = function(object) {
 而且增加了extend方法也为反射枚举带来一定的麻烦，这从后面Hash对象的用法可以看到。
 */
  
-/*
+/**
 将对象转换为字符串，这里能够更详细一些，只要对象自定义了inspect函数。而不是原来对象的toString总是[object]。
 例如后面对数组定义了inspect函数，使得
 var arr=[1,2,3];
@@ -96,7 +96,7 @@ Object.inspect = function(object) {
   }
 }
  
-/*
+/**
 一个很重要的方法，能够将函数绑定到某个对象运行
 和1.3.1版本相比，原来不能在绑定的时候就添加参数，而现在可以。
 例如：
@@ -118,7 +118,7 @@ Function.prototype.bind = function() {
     return __method.apply(object, args.concat($A(arguments)));
   }
 }
-/*
+/**
 将函数作为对象的事件监听器，这样可以产生独立而且通用的事件处理程序，例如要对单击事件进行处理：
 function clickHandler(element){
 	//处理element的单击事件
@@ -136,7 +136,7 @@ Function.prototype.bindAsEventListener = function(object) {
   }
 }
  
-/*
+/**
 所有的数字类型都是Number类的实例，下面就是给Number类定义一些方法
 */
 Object.extend(Number.prototype, {
@@ -152,7 +152,7 @@ Object.extend(Number.prototype, {
   succ: function() {
     return this + 1;
   },
-	/*
+	/**
 	执行指定次数的循环，例如获取10个随机数
 	var ran=[]
 	var c=10;
@@ -167,11 +167,11 @@ Object.extend(Number.prototype, {
   }
 });
  
-/*
+/**
 Try对象，仅有一个方法these
 */
 var Try = {
-	/*
+	/**
 	根据参数指定的函数进行调用，返回第一个调用成功的值
 	在后面跨浏览器建立XMLHttpRequest对象时就用到了。
 	如果所有都不成功则返回undefined
@@ -194,12 +194,12 @@ var Try = {
 /*--------------------------------------------------------------------------*/
  
  
-/*
+/**
 定时器类，比起window.setInterval函数，该类能够使得回调函数不会被并发调用，见onTimerEvent的注释。
 */
 var PeriodicalExecuter = Class.create();
 PeriodicalExecuter.prototype = {
-	/*
+	/**
 	构造函数，指定回调函数和执行频率，单位为秒
 	*/
   initialize: function(callback, frequency) {
@@ -208,7 +208,7 @@ PeriodicalExecuter.prototype = {
     this.currentlyExecuting = false;
     this.registerCallback();
   },
-	/*
+	/**
 	开始执行定时器，一般不要显示调用，在构造函数中被调用
 	注意这里写为：
 	this.onTimerEvent.bind(this)
@@ -219,7 +219,7 @@ PeriodicalExecuter.prototype = {
   registerCallback: function() {
     setInterval(this.onTimerEvent.bind(this), this.frequency * 1000);
   },
-	/*
+	/**
 	相当于回调函数的一个代理。
 	在传统的setInterval函数中，时间一到，便强制执行回调函数，而这里加入了currentlyExecuting属性判断，
 	则如果callback函数的执行时间超过了一个时间片，则阻止其被重复执行。
@@ -237,7 +237,8 @@ PeriodicalExecuter.prototype = {
 }
  
 /*--------------------------------------------------------------------------*/
-/*
+
+/**
 很方便的一个快速链接函数，能够获得参数所指定的页面节点，如果有多个参数则返回数组。
 参数的形式既可以是节点的id值，也可以是节点的引用，即$($("someId"))和$("someId")是等价的;
 */
@@ -258,7 +259,7 @@ function $() {
   return elements;
 }
  
-/*
+/**
 为字符串对象添加方法，和前面为Number添加方法的原理相同
 */
 Object.extend(String.prototype, {
