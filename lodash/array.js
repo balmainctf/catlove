@@ -157,11 +157,111 @@ var _ = require('lodash');
 
 
 /****** _.sortedIndex(array, value, [iteratee=_.identity], [thisArg]) 在对一个有序数组array进行插入的时候，返回value应该插入的位置。从左向右计算  *******/
-console.log(_.sortedIndex([30, 50], 20));
-console.log(_.sortedIndex([4, 4, 5, 5], 5));
+//console.log(_.sortedIndex([30, 50], 20));      //0
+//console.log(_.sortedIndex([30, 50], 40));      //1
+//console.log(_.sortedIndex([30, 50], 60));      //2
+//console.log(_.sortedIndex([30, 50], 50));      //1
+//console.log(_.sortedIndex([4, 4, 5, 5], 5));   //2
+
+
+/****** _.sortedLastIndex(array, value, [iteratee=_.identity], [thisArg]) sortedLastIndex 用法类似于sortedindex,不同的是从右至左计算插入的位置  *******/
 
 
 
+/****** _.take(array, [n=1]) 数组切片  *******/
+//console.log(_.take([1, 2, 3]));          // [ 1 ]
+//console.log(_.take([1, 2, 3], 2));       // [ 1, 2 ]
+//console.log(_.take([1, 2, 3], 5));       // [ 1, 2, 3 ]
+//console.log(_.take([1, 2, 3], 0));       // []
+
+
+
+/****** _.takeRight(array, [n=1])  同_.take方向相反   *******/
+//console.log(_.takeRight([1, 2, 3]));          // [ 3 ]
+//console.log(_.takeRight([1, 2, 3], 2));       // [ 2, 3 ]
+//console.log(_.takeRight([1, 2, 3], 5));       // [ 1, 2, 3 ]
+//console.log(_.takeRight([1, 2, 3], 0));       // []
+
+
+
+/****** _.takeRightWhile(array, [predicate=_.identity], [thisArg])   *******/
+//var arr = _.takeRightWhile([1, 2, 3], function(n) {
+//    return n > 1;
+//});
+//console.log(arr);   // [ 2, 3 ]
+//
+//var users = [
+//    { 'user': 'barney',  'active': true },
+//    { 'user': 'fred',    'active': false },
+//    { 'user': 'pebbles', 'active': false }
+//];
+//
+//console.log(_.pluck(_.takeRightWhile(users, { 'user': 'pebbles', 'active': false }), 'user'));    //[ 'pebbles' ]
+//
+//console.log(_.pluck(_.takeRightWhile(users, 'active', false), 'user'));     //[ 'fred', 'pebbles' ]
+//
+//console.log(_.pluck(_.takeRightWhile(users, 'active'), 'user'));    //[]
+
+
+/****** _.takeWhile(array, [predicate=_.identity], [thisArg])   *******/
+
+
+
+
+/****** _.union([arrays])  数组合并，去除重复值  *******/
+//console.log(_.union([1, 2], [4, 2], [2, 1]));      // [ 1, 2, 4 ]
+
+
+/****** _.uniq(array, [isSorted], [iteratee], [thisArg]) 数组去重  *******/
+//console.log(_.uniq([2, 1, 2]));            // [ 2, 1 ]
+//console.log(_.uniq([1, 1, 2], true));      // [ 1, 2 ]
+//// [ 1, 2.5 ]
+//var arr = _.uniq([1, 2.5, 1.5, 2], function(n) {
+//            return this.floor(n);
+//        }, Math);
+//console.log(arr);
+////[ { x: 1 }, { x: 2 } ]
+//console.log(_.uniq([{ 'x': 1 }, { 'x': 2 }, { 'x': 1 }], 'x'));
+
+
+
+/****** _.zip(array)    zip数组   *******/
+
+
+
+
+
+/****** _.unzip(array)    zip的逆运算，还原zip后的数组   *******/
+
+
+
+
+/****** _.zipObject(props, [values=[]])   *******/
+
+
+
+
+/****** _.zipWith([arrays], [iteratee], [thisArg])   *******/
+
+
+
+
+/****** _.unzipWith(array, [iteratee], [thisArg])   在数组重组的时候同时进行某些操作   *******/
+
+
+
+
+/****** _.without(array, [values])   从数组中去除某些值  不同于difference方法。其values参数可以不是一个数组，而是接在array参数之后的零散参数 *******/
+//console.log(_.without([1, 2, 1, 3], 1, 2));         // 将数组中的元素1、2移除 原数组变为[ 3 ]
+
+
+
+
+/****** _.xor([arrays]) 对称消除重复值  如果n和n+1还有未消除的非重复值，那么会和n+2和n+3消除后保留下来的数组进行合并 *******/
+//console.log(_.xor([1, 2], [4, 2]));              // [ 1, 4 ]
+//console.log(_.xor([1,2],[1,2],[1,4],[1,4]));     //[]
+//console.log(_.xor([1,2],[1,2],[1,4]));           //[1,4]
+//console.log(_.xor([1,2],[1,2,3],[1,2]));           //[ 3, 1, 2 ]
 
 
 
