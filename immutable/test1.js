@@ -81,5 +81,11 @@ console.log(x.mergeDeepWith((prev, next) => prev / next, y)); //Map { "a": Map {
 */
 
 
+var list1 = [{name:'zhangsan',age:'25'},{name:'lisi',age:'30'}];
+var list2 = [{name:'zhaoliu',age:'24'},{name:'wangqi',age:'35'}];
 
+var arr1 = immutable.fromJS(list1);
+var arr2 = immutable.fromJS(list2);
+var arr3 = arr1.concat(arr2);
+console.log(arr3);
 
