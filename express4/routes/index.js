@@ -8,7 +8,7 @@
 //
 //module.exports = router;
 
-
+var express = require('express');
 var model = require('./model.js');
 var Demo = model.Demo;
 
@@ -28,7 +28,7 @@ exports.index = function(req, res){
 //跳转到添加页面
 exports.add = function(req, res) {
   console.log('----here');
-  res.render('add.html', {title :'添加 demo list'});
+  res.render('add', {title :'添加 demo list'});
 };
 
 //添加操作
