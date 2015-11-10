@@ -9,7 +9,7 @@
 //module.exports = router;
 
 
-var model = require('./model');
+var model = require('./model.js');
 var Demo = model.Demo;
 
 
