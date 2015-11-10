@@ -1,9 +1,35 @@
 <% include header.ejs %>
 
 <div class="well jumbotron">
-<h1><%= title %></h1>
-<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    <h1><%= title %></h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>uid</th>
+            <th>title</th>
+            <th>content</th>
+            <th>createTime</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% demos.forEach(function( demo ){ %>
+        <tr>
+            <td><%=demo._id%></td>
+            <td><%= demo.uid %></td>
+            <td><%= demo.title %></td>
+            <td><%= demo.content %></td>
+            <td><%=demo.createTime%></td>
+            <td><a href="http://houzhiqingjava.blog.163.com/blog/del.html?id=<%=demo._id%>">Delete</a> | <a href="http://houzhiqingjava.blog.163.com/blog/modify.html?id=<%=demo._id%>">Update</a></td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+
+
 </div>
 
 <% include footer.ejs %>

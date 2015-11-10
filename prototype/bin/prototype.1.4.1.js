@@ -215,7 +215,7 @@ function $() {
 //删除字符串中的HTML标记
 Object.extend(String.prototype, {
   stripTags: function() {
-    return this.replace(/</?[^>]+>/gi, '');
+    //return this.replace(/</?[^>]+>/gi, '');
   },
 //删除字符串中的脚本块
   stripScripts: function() {
@@ -278,7 +278,7 @@ Object.extend(String.prototype, {
   },
 //得到字符串的组成结构
   inspect: function() {
-    return "'" + this.replace('/', '//').replace("'", '/'') + "'";
+    //return "'" + this.replace('/', '//').replace("'", '/'') + "'";
   }
 });
 //定义了一个等价的函数
@@ -751,7 +751,7 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
     try {
       this.url = url;
       if (this.options.method == 'get' && parameters.length > 0)
-        this.url += (this.url.match(/?/) ? '&' : '?') + parameters;
+        //this.url += (this.url.match(/?/) ? '&' : '?') + parameters;
 
       Ajax.Responders.dispatch('onCreate', this, this.transport);
 
@@ -837,8 +837,8 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
         this.dispatchException(e);
       }
 
-      if ((this.header('Content-type') || '').match(/^text/javascript/i))
-        this.evalResponse();
+      //if ((this.header('Content-type') || '').match(/^text/javascript/i))
+      //  this.evalResponse();
     }
 
     try {

@@ -13,5 +13,9 @@
     "express": "~4.11.1",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
+  },
+  "devDependencies": {
+    "express-mongoose": "^0.1.0",
+    "mongoose": "^4.2.5"
   }
 }

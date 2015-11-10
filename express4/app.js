@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+var routes = require('./routes/index.js');
 //var users = require('./routes/users');
 
 var app = express();
@@ -55,6 +55,20 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+
+app.get('/add',routes.add);
+
+app.post('/add',routes.create);
+
+//app.get('/del',routes.delById);
+//
+//app.get('/modify',routes.toModify);
+//
+//app.post('/modify',routes.modify);
+
+
+
 
 
 module.exports = app;
