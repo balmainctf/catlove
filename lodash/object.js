@@ -278,7 +278,8 @@ var _ = require('lodash');
 
 
 
-
-
+/****** _.assign(object, [sources], [customizer], [thisArg]) 对象继承，类似于extend *******/
+//var newObj = _.assign({ 'user': 'barney' }, { 'age': 40 }, { 'user': 'fred' });
+//console.log(newObj);    // { user: 'fred', age: 40 }
 
 
