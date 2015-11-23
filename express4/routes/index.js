@@ -16,6 +16,7 @@ var Demo = model.Demo;
 exports.index = function(req, res){
   //查询所有数据，保存到demos中，在页面循环输出
   Demo.find(function(err,docs){
+    console.log(docs);
     res.render('index', {
       title:'Express Demo Example',
       demos:docs
@@ -34,6 +35,8 @@ exports.add = function(req, res) {
 //添加操作
 //创建新纪录
 exports.create = function(req, res){
+  console.log(req.body);
+
   var demo = new Demo({
     uid : req.body.uid,
     title: req.body.title,
@@ -43,8 +46,12 @@ exports.create = function(req, res){
   console.log('create----');
   demo.save(function(err,doc){
     console.log(doc);
-    res.redirect('/');
+    res.send({"status": "success",'uid':req.body.title, "title": req.body.title,'content':req.body.content});
   });
+
+};
+
+exports.delById = function(req,res){
 
 };
 

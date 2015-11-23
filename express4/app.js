@@ -26,13 +26,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/users', users);
 
 
+app.use(bodyParser.json({limit: '1mb'}));  //这里指定参数使用 json 格式
+app.use(bodyParser.urlencoded({            //此项必须在 bodyParser.json 下面,为参数编码
+    extended: true
+}));
+
 app.get('/',routes.index);
 
 app.get('/add',routes.add);
 
 app.post('/create',routes.create);
 
-//app.get('/del',routes.delById);
+app.post('/del',routes.delById);
 //
 //app.get('/modify',routes.toModify);
 //

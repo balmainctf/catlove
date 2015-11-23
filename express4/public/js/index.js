@@ -4,20 +4,30 @@
 $(function(){
     $('#addNew').on('click',function(){
         var data = {
-
+            uid:$("input[name='uid']").val(),
+            title:$("input[name='title']").val(),
+            content:$("textarea[name='content']").val()
         };
+
+        //console.log(data);
 
         $.ajax({
             url:'/create',
             type:'post',
-            dataType: 'json',
+            data:data,
+            dataType:'json',
             success:function(res){
-
+                console.log(res);
+                location.href = '/';
             },
             error:function(e){
-
+                console.log(e);
             }
         });
 
     });
+
+    function delData(id){
+        console.log(id);
+    };
 });

@@ -23,7 +23,7 @@
             <td><%= demo.title %></td>
             <td><%= demo.content %></td>
             <td><%=demo.createTime%></td>
-            <td><a href="http://houzhiqingjava.blog.163.com/blog/del.html?id=<%=demo._id%>">Delete</a> | <a href="http://houzhiqingjava.blog.163.com/blog/modify.html?id=<%=demo._id%>">Update</a></td>
+            <td><a href="javascript:;" onClick="delData('<%=demo._id%>')">Delete</a> | <a href="http://houzhiqingjava.blog.163.com/blog/modify.html?id=<%=demo._id%>">Update</a></td>
         </tr>
         <% }); %>
         </tbody>
