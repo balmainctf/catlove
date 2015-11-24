@@ -89,6 +89,31 @@ exports.upd = function(req,res){
 
 };
 
+/**
+ * 更新数据
+ */
+exports.update = function(req,res){
+
+    var id = req.body._id;
+
+    var demo = new Demo({
+        _id:id,
+        uid : req.body.uid,
+        title: req.body.title,
+        content : req.body.content
+    });
+
+    if(id && '' != id) {
+        console.log('----update id = ' + id + "," + demo);
+        Demo.findByIdAndUpdate(id, demo,function(err, docs) {
+            console.log('update-----'+ docs);
+            res.send({"status": "success",'uid':req.body.title, "title": req.body.title,'content':req.body.content});
+        });
+    }
+
+};
+
+
 
 
 

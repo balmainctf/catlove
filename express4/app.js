@@ -41,7 +41,7 @@ app.post('/del',routes.delById);
 //
 app.get('/modify/:id',routes.upd);
 //
-//app.post('/modify',routes.modify);
+app.post('/update',routes.update);
 
 
 // catch 404 and forward to error handler
