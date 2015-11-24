@@ -29,6 +29,7 @@ app.engine( '.html', require( 'ejs' ).__express );
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+//文件上传
 app.use(multer());
 
 // 设定静态文件目录，比如本地文件

@@ -21,6 +21,9 @@ var minifyCss = require('./gulp-minify-css');
 //命令行操作
 var sh = require('shelljs');
 
+//重命名
+rename = require('gulp-rename');
+
 
 //压缩javascript 文件，压缩后文件放入build/js下
 gulp.task('minifyjs',function(){
@@ -31,9 +34,20 @@ gulp.task('minifyjs',function(){
 
 //合并build/js文件夹下的所有javascript 文件为一个main.js放入build/js下
 gulp.task('alljs', function() {
-    return gulp.src('./build/js/*.js')
+    gulp.src('./build/js/*.js')
         .pipe(concat('main.min.js'))
         .pipe(gulp.dest('./js/min'));
+});
+
+gulp.task('run',function(){
+    gulp.src('public/js/admin.js')
+        .pipe(uglify())
+        .pipe(rename('admin.min.js'))
+        .pipe(gulp.dest('build/'))
+    gulp.src('public/js/detail.js')
+        .pipe(uglify())
+        .pipe(rename('detail.min.js'))
+        .pipe(gulp.dest('build/'))
 });
 
 //开启本地 Web 服务器功能
