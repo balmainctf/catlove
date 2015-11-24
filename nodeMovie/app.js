@@ -1,139 +1,59 @@
-/**
- * Created by Administrator on 2015/8/20.
- * 入口文件
- */
-var express = require('express');
-var path = require('path');
+var express = require('express')
+var path = require('path')
+var mongoose = require('mongoose')
+var mongoStore = require('connect-mongo')(express)
+var port = process.env.PORT || 3000
+var app = express()
+var fs = require('fs')
+var dbUrl = 'mongodb://localhost/imooc'
 
-var mongoose = require('mongoose');
+mongoose.connect(dbUrl)
 
-//用来替换对象中旧的字段
-var underScore = require('underscore');
-//模型
-var Movie = require('./models/movie.js');
-//命令行获取或默认设置
-var port = process.env.PORT || 3000;
-var app = express();
+// models loading
+var models_path = __dirname + '/app/models'
+var walk = function(path) {
+  fs
+    .readdirSync(path)
+    .forEach(function(file) {
+      var newPath = path + '/' + file
+      var stat = fs.statSync(newPath)
 
-//连接数据库
-mongoose.connect('mongodb://localhost/movies');
-
-//设置模版路径
-app.set('views','./views/pages');
-//模版引擎
-app.set('view engine','jade');
-//表单数据格式化
-//app.use(express.bodyParser());
-//静态资源的获取
-app.use(express.static(path.join(__dirname,'bower_components')));
-//端口监听
-app.listen(port);
-//app.set('port',port);
-console.log('app start on port' + port);
-
-//express路由设置
-//get 方式
-//第一个参数是路由名(在url上显示)，，第二个是callback
-app.get('/',function(req,res){
-    //查询
-    Movie.fetch(function(err,movies){
-        if(err){
-            console.log(err);
+      if (stat.isFile()) {
+        if (/(.*)\.(js|coffee)/.test(file)) {
+          require(newPath)
         }
-        res.render('index',{
-            title:'首页',
-            movies: movies
-        });
-    });
-});
+      }
+      else if (stat.isDirectory()) {
+        walk(newPath)
+      }
+    })
+}
+walk(models_path)
+app.set('views', './app/views/pages')
+app.set('view engine', 'jade')
+app.use(express.bodyParser())
+app.use(express.cookieParser())
+app.use(express.multipart())
+app.use(express.session({
+  secret: 'imooc',
+  store: new mongoStore({
+    url: dbUrl,
+    collection: 'sessions'
+  })
+}))
 
-app.get('/movie/:id',function(req,res){
-    console.log(req);
-    var id = req.params.id;
-    Movie.findById(id,function(err,movie){
-        res.render('detail',{
-            title: '详情页' + movie.title,
-            movie: movie
-        });
-    });
-});
+if ('development' === app.get('env')) {
+  app.set('showStackError', true)
+  app.use(express.logger(':method :url :status'))
+  app.locals.pretty = true
+  //mongoose.set('debug', true)
+}
 
-app.get('/admin/movie',function(req,res){
-    res.render('admin',{
-        title:'后台录入页',
-        movie:{
-            title:'',
-            doctor:'',
-            country:'',
-            year:'',
-            poster:'',
-            flash:'',
-            summary:'',
-            language:''
+require('./config/routes')(app)
 
-        }
-    });
-});
+app.listen(port)
+app.locals.moment = require('moment')
+app.use(express.static(path.join(__dirname, 'public')))
 
-//admin update
-app.get('/admin/update/:id',function(req,res){
-    var id = req.params.id;
-    if(id){
-        Movie.findById(id,function(err,movie){
-            res.render('admin',{
-                title:'后台更新',
-                movie:movie
-            });
-        });
-    }
-});
+console.log('imooc started on port ' + port)
 
-//admin post movie
-app.post('/admin/movie/new',function(req,res){
-    var id = req.body.movie._id;
-    var movieObj = req.body.movie;
-    var _movie;
-    //判断是否新更新数据
-    if(id !== 'undefined'){
-        Movie.findById(id, function(err,movie){
-            if(err){
-                console.log(err);
-            }
-
-            _movie = underScore.extend(movie,movieObj);
-
-        });
-    }else{
-        //新添加数据
-        _movie = new Movie({
-            doctor: movieObj.doctor,
-            title:movieObj.title,
-            country:movieObj.country,
-            language: movieObj.language,
-            year:movieObj.year,
-            poster:movieObj.poster,
-            summary: movieObj.summary,
-            flash:movieObj.flash
-        });
-    }
-    _movie.save(function(err,movie){
-        if(err){
-            console.log(err);
-        }
-        //指向跳转
-        res.redirect('/movie/' + movie._id);
-    });
-});
-
-app.get('/admin/list',function(req,res){
-    //查询
-    Movie.fetch(function(err,movies){
-        if(err){
-            console.log(err);
-        }
-        res.render('index',{
-            title:'影片列表',
-            movies: movies
-        });
-    });
-});

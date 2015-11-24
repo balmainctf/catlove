@@ -158,7 +158,7 @@ File.prototype.save = function(filename,content,charset,cb,bAppend){
     var self = this;
     var cbFs = function(){
         var buffer = new Buffer(content,charset ? charset : "utf8");
-        fs.open(filename, bAppend ? 'a' : 'w', 0666, function(err,fd){
+        fs.open(filename, bAppend ? 'a' : 'w', '0666', function(err,fd){
             if (err){
                 cb(err);
                 return ;
