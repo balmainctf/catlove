@@ -27,7 +27,27 @@ $(function(){
 
     });
 
-    function delData(id){
-        console.log(id);
-    };
 });
+
+function delData(id){
+    console.log(id);
+    var data = {
+       id:id
+    };
+
+    $.ajax({
+        url:'/del',
+        type:'post',
+        data:data,
+        dataType:'json',
+        success:function(res){
+            console.log(res);
+            location.href = '/';
+        },
+        error:function(e){
+            console.log(e);
+        }
+    });
+
+
+};

@@ -39,7 +39,7 @@ app.post('/create',routes.create);
 
 app.post('/del',routes.delById);
 //
-//app.get('/modify',routes.toModify);
+app.get('/modify/:id',routes.upd);
 //
 //app.post('/modify',routes.modify);
 

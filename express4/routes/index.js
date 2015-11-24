@@ -50,8 +50,42 @@ exports.create = function(req, res){
   });
 
 };
-
+/**
+ * 删除一条记录
+ * @param req
+ * @param res
+ */
 exports.delById = function(req,res){
+    console.log(req.body);
+    var id = req.body.id;
+    if(id && id!=''){
+        Demo.findByIdAndRemove(id, function(err, docs) {
+          console.log('delete-----'+ docs);
+          res.send({"status": "success",'uid':req.body.id});
+        });
+    }
+
+};
+
+/**
+ * 跳转到更新页面
+ * @param req
+ * @param res
+ */
+exports.upd = function(req,res){
+
+    //获取路径值
+    console.log(req.params);
+    var id = req.params.id;
+
+    if(id && id!=''){
+        Demo.findById(id, function(err, docs) {
+          console.log('findById-----'+ docs);
+          res.render('update',
+              {title :'添加 demo list',demo:docs}
+          );
+        });
+    }
 
 };
 
