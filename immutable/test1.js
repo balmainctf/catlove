@@ -91,9 +91,23 @@ var arr1 = immutable.fromJS(list1);
 //排序
 //console.log(arr1.sortBy((n)=>n.get('age')));
 
-console.log(arr1.findLast((n)=>{
-    return n.get('age') > 20;
-}));
+//console.log(arr1.findLast((n)=>{
+//    return n.get('age') > 20;
+//}));
+
+var map1 = arr1.get(0);
+
+//var keyName = map1.findKey((n)=>{
+//    return n;
+//});
+//
+//console.log(keyName);
+
+map1.mapKeys((n)=>{
+    console.log(n);
+});
+
+
 
 
 
