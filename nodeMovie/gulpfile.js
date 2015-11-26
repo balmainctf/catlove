@@ -16,7 +16,7 @@ var concat = require('gulp-concat');
 var config = require('./config.json');
 
 //压缩CSS
-var minifyCss = require('./gulp-minify-css');
+var minifyCss = require('gulp-minify-css');
 
 //命令行操作
 var sh = require('shelljs');
