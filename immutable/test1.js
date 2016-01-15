@@ -81,31 +81,38 @@ console.log(x.mergeDeepWith((prev, next) => prev / next, y)); //Map { "a": Map {
 */
 
 
-var list1 = [{name:'zhangsan',age:'25'},{name:'lisi',age:'30'}];
-//var list2 = [{name:'zhaoliu',age:'24'},{name:'wangqi',age:'35'}];
+//var list1 = [{name:'zhangsan',age:'25'},{name:'lisi',age:'30'}];
+////var list2 = [{name:'zhaoliu',age:'24'},{name:'wangqi',age:'35'}];
+////
+//var arr1 = immutable.fromJS(list1);
+////var arr2 = immutable.fromJS(list2);
+////var arr3 = arr1.concat(arr2);
+////console.log(arr3);
+////排序
+////console.log(arr1.sortBy((n)=>n.get('age')));
 //
-var arr1 = immutable.fromJS(list1);
-//var arr2 = immutable.fromJS(list2);
-//var arr3 = arr1.concat(arr2);
-//console.log(arr3);
-//排序
-//console.log(arr1.sortBy((n)=>n.get('age')));
-
-//console.log(arr1.findLast((n)=>{
-//    return n.get('age') > 20;
-//}));
-
-var map1 = arr1.get(0);
-
-//var keyName = map1.findKey((n)=>{
-//    return n;
+////console.log(arr1.findLast((n)=>{
+////    return n.get('age') > 20;
+////}));
+//
+//var map1 = arr1.get(0);
+//
+////var keyName = map1.findKey((n)=>{
+////    return n;
+////});
+////
+////console.log(keyName);
+//
+//map1.mapKeys((n)=>{
+//    console.log(n);
 //});
-//
-//console.log(keyName);
+var obj1 = {name:1,age:0,sex:2};
+var map1 = immutable.fromJS(obj1);
+console.log(map1);
+console.log(map1.values(function(){
 
-map1.mapKeys((n)=>{
-    console.log(n);
-});
+}));
+
 
 
 
