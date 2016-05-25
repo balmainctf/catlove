@@ -106,12 +106,38 @@ console.log(x.mergeDeepWith((prev, next) => prev / next, y)); //Map { "a": Map {
 //map1.mapKeys((n)=>{
 //    console.log(n);
 //});
-var obj1 = {name:1,age:0,sex:2};
-var map1 = immutable.fromJS(obj1);
-console.log(map1);
-console.log(map1.values(function(){
+//var obj1 = {name:1,age:0,sex:2};
+var list = [
+    {name:'A1',age:0,sex:2},
+    {name:'B2',age:1,sex:1},
+    {name:'B2',age:11,sex:1}
+];
 
-}));
+var map1 = immutable.fromJS(list);
+//var map2 = {
+//    "A123456":[{name:1,age:0,sex:2},{name:2,age:1,sex:1}],
+//    "A654321":[{name:2,age:11,sex:1}]
+//};
+
+//var map3 = immutable.fromJS(map2);
+
+//console.log(map1);
+//console.log(map1.values(function(){
+//
+//}));
+//filter筛选
+//console.log(map1.filter((x,index)=>{
+//    console.log(index);
+//    return x.get('name') == 1;
+//}));
+
+var mpp3 = map1.filter((item)=>{
+    return item.get('name') == 'B2';
+}).groupBy((n)=>{
+    return n.get('name');
+});
+
+console.log(mpp3);
 
 
 
