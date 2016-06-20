@@ -2,11 +2,12 @@
  * promise版
  * Created by Administrator on 2016/6/20.
  */
-var fs = require('fs');
-var path = require('path');
-var request = require('request');
-var cheerio = require('cheerio');
-var reqUrl = 'http://www.twfun.info/html/2015/05/56658.html';
+let fs = require('fs');
+let path = require('path');
+let request = require('request');
+let cheerio = require('cheerio');
+let reqUrl = '';
+let pageSize = 25;
 
 let queryUrl = async (pageNum) => {
     console.log('第'+pageNum+'页开始');
@@ -70,7 +71,7 @@ let downloadImg =(uri, filename) => {
 };
 
 (async () => {
-    for(let j=1;j<20;j++){
+    for(let j=1;j<pageSize;j++){
         await queryUrl(j);
     }
 })();
