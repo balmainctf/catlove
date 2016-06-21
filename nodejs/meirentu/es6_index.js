@@ -8,7 +8,19 @@ let request = require('request');
 let cheerio = require('cheerio');
 let reqUrl = '';
 let pageSize = 25;
-
+/**
+ * http://www.twfun.info/html/2015/09/1009656.html
+ * http://www.twfun.info/html/2015/07/928358.html
+ * http://www.twfun.info/html/2014/03/42817.html
+ * http://www.twfun.info/html/2013/12/24665.html
+ * http://www.twfun.info/html/2013/12/22099.html
+ * http://www.twfun.info/html/2013/12/208867.html
+ * http://www.twfun.info/html/2013/12/208866.html
+ * http://www.twfun.info/html/2013/12/208865.html
+ * http://www.twfun.info/html/2013/12/16097.html
+ * http://www.twfun.info/html/2013/11/11163.html
+ * @type {string}
+ */
 let queryUrl = async (pageNum) => {
     console.log('第'+pageNum+'页开始');
     await getPageBody(reqUrl+'/'+pageNum);
