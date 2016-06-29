@@ -8,18 +8,20 @@ let cheerio = require('cheerio');
 let request = require('./request.js');
 
 let startPageNum = 1;
-let lastPageNum = 21;
+let lastPageNum = 2;
 let reqUrl = 'http://www.pic177.com/html/2015/07/923717.html';
 
 let getPage = async (url)=>{
+    let res;
     try{
         console.log('请求URL===》'+url);
         console.log('开始请求页面...');
-        let res = await request(url,{
+        res = await request(url,{
             timeout:5000
         });
     }catch(e){
-        console.error(e);
+        console.error('请求页面异常=====>',e);
+        return;
     }
     if(res && res.status == 200){
         //拿到body字符串
@@ -30,6 +32,7 @@ let getPage = async (url)=>{
         let meiren = $('.entry-content p img').toArray();
         await acquireData(meiren);
     }
+
 };
 
 /**
