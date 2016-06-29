@@ -5,7 +5,7 @@
 let fs = require('fs');
 let path = require('path');
 let cheerio = require('cheerio');
-let urllib = require('urllib');
+let urllib = require('urllib-promise');
 
 let startPageNum = 1;
 let lastPageNum = 20;
@@ -13,9 +13,7 @@ let reqUrl = '';
 
 let getPage = async (url)=>{
     console.log('开始请求页面...');
-    let res = await urllib.request(url,{
-        timeout:3000
-    });
+    let res = await urllib.request(url);
     if(res && res.status == 200){
         //拿到body字符串
         let body = res.data.toString();
