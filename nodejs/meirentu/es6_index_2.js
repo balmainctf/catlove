@@ -5,15 +5,22 @@
 let fs = require('fs');
 let path = require('path');
 let cheerio = require('cheerio');
-let urllib = require('urllib-promise');
+let request = require('./request.js');
 
 let startPageNum = 1;
-let lastPageNum = 20;
-let reqUrl = '';
+let lastPageNum = 21;
+let reqUrl = 'http://www.pic177.com/html/2015/07/923717.html';
 
 let getPage = async (url)=>{
-    console.log('开始请求页面...');
-    let res = await urllib.request(url);
+    try{
+        console.log('请求URL===》'+url);
+        console.log('开始请求页面...');
+        let res = await request(url,{
+            timeout:5000
+        });
+    }catch(e){
+        console.error(e);
+    }
     if(res && res.status == 200){
         //拿到body字符串
         let body = res.data.toString();
@@ -22,8 +29,6 @@ let getPage = async (url)=>{
         //解析指定位置图片数组
         let meiren = $('.entry-content p img').toArray();
         await acquireData(meiren);
-    }else{
-        console.error('页面请求错误');
     }
 };
 
@@ -59,7 +64,7 @@ let downloadImg = async (url, filename) => {
     //stream stream.Writable类型
     let writeAble = fs.createWriteStream('images/'+filename);
     try{
-        await urllib.request(url,{
+        await request(url,{
             writeStream:writeAble
         });
     }catch(e){
@@ -73,8 +78,8 @@ let downloadImg = async (url, filename) => {
  * @param last  结束页码
  * @param reqUrl 请求url
  */
-var getImgFun = async (start,last,reqUrl) => {
-    for(let i=start;i<last+1;i++){
+var queryPage = async (startPageNum,lastPageNum,reqUrl) => {
+    for(let i=startPageNum;i<lastPageNum+1;i++){
         let url = reqUrl + '/' + i;
         console.log('第' + i + '页开始');
         await getPage(url);
@@ -86,5 +91,4 @@ var getImgFun = async (start,last,reqUrl) => {
 /**
  * 调用
  */
-getImgFun(startPageNum,lastPageNum,reqUrl);
-
+queryPage(startPageNum,lastPageNum,reqUrl);
