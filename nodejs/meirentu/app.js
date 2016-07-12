@@ -3,4 +3,4 @@
  */
 require("babel-core/register");
 require("babel-polyfill");
-require('./es6_index_2.js');
+require('./es6_index_3.js');
