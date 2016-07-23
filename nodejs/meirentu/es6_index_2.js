@@ -6,14 +6,15 @@ let fs = require('fs');
 let path = require('path');
 let cheerio = require('cheerio');
 let request = require('./request.js');
+let _ = require('lodash');
 
 let startPageNum = 1;
-let lastPageNum = 1;
-let reqUrl = 'http://www.twfun.info/html/2014/03/46099.html';
+let lastPageNum = 23;
+let reqUrl = 'http://www.twfun.info/html/2015/07/965213.html';
 
 let errorPage = [];
 
-let getPage = async (url,pageNum)=>{
+let getPage = async (url,pageNum,lostImgArr)=>{
     let res;
     try{
         console.log('请求URL===》'+url);
@@ -33,7 +34,7 @@ let getPage = async (url,pageNum)=>{
         let $ = cheerio.load(body);
         //解析指定位置图片数组
         let meiren = $('.entry-content p img').toArray();
-        await acquireData(meiren,pageNum);
+        await acquireData(meiren,pageNum,lostImgArr);
     }
 
 };
@@ -42,14 +43,25 @@ let getPage = async (url,pageNum)=>{
  * 解析数组对象
  * @param imgArr
  */
-let acquireData = async (imgArr,pageNum) => {
-    for(let i=0,len=imgArr.length;i<len;i++){
-        let imgSrc = imgArr[i].attribs.src;
-        let filename = parseUrlForFileName(imgSrc,pageNum,i);
-        console.log('开始下载图片'+filename);
-        await downloadImg(imgSrc,filename);
-        console.log(filename+"下载完成");
+let acquireData = async (imgArr,pageNum,lostImgArr) => {
+    if(lostImgArr){
+        for(let i=0,len=lostImgArr.length;i<len;i++){
+            let imgSrc = imgArr[lostImgArr[i]].attribs.src;
+            let filename = parseUrlForFileName(imgSrc,pageNum,lostImgArr[i]);
+            console.log('开始下载图片'+filename);
+            await downloadImg(imgSrc,filename);
+            console.log(filename+"下载完成");
+        }
+    }else{
+        for(let i=0,len=imgArr.length;i<len;i++){
+            let imgSrc = imgArr[i].attribs.src;
+            let filename = parseUrlForFileName(imgSrc,pageNum,i);
+            console.log('开始下载图片'+filename);
+            await downloadImg(imgSrc,filename);
+            console.log(filename+"下载完成");
+        }
     }
+
 };
 /**
  * 重命名
@@ -75,7 +87,8 @@ let downloadImg = async (url, filename) => {
             writeStream:writeAble
         });
     }catch(e){
-        console.error(filename + '图片保存错误');
+        console.error(filename + '图片保存错误，重新开始下载');
+        await downloadImg(url,filename);
     }
 };
 
@@ -85,7 +98,7 @@ let downloadImg = async (url, filename) => {
  * @param last  结束页码
  * @param reqUrl 请求url
  */
-var queryPage = async (startPageNum,lastPageNum,reqUrl) => {
+let queryPage = async (startPageNum,lastPageNum,reqUrl) => {
     for(let i=startPageNum;i<lastPageNum+1;i++){
         let url = reqUrl;
         if(i > 1){
@@ -98,10 +111,56 @@ var queryPage = async (startPageNum,lastPageNum,reqUrl) => {
     console.log('爬取结束');
     if(errorPage.length){
         console.log('失败请求页面======>'+errorPage.toString());
+        for(let j=0,len=errorPage.length;j<len;j++){
+            let url = reqUrl;
+            if(j > 1){
+                url = reqUrl + '/' + j;
+            }
+            console.log('第' + j + '页开始');
+            await getPage(url,j);
+            console.log('第' + j + '页结束');
+        }
+        console.log('重新爬取结束');
     }
 };
 
 /**
- * 调用
+ * 当某个页面的图片没有下载完成时调用
+ * @param arr
+ *   [
+ *      {pageNum:16,lostImgIndex:[1,2,4,6,8]},
+ *      {pageNum:17,lostImgIndex:[],isLostAll:true},
+ *   ]
+ * @param reqUrl
  */
-queryPage(startPageNum,lastPageNum,reqUrl);
+let queryLostImg = async (arr,reqUrl) => {
+    for(let i=0,len=arr.length; i<len; i++){
+        let lostPage = arr[i];
+        let pageNum = lostPage.pageNum;
+        //是否需要请求页面中所有图片
+        let isLostAll = lostPage.isLostAll;
+        let lostImgIndexArr = (!isLostAll)?lostPage.lostImgIndex:false;
+        let url = reqUrl;
+        if(pageNum > 1){
+            url = reqUrl + '/' + pageNum;
+        }
+        console.log('第' + pageNum + '页开始');
+        await getPage(url,pageNum,lostImgIndexArr);
+        console.log('第' + pageNum + '页结束');
+    }
+    console.log('爬取结束');
+};
+
+/**
+ * 全局调用
+ */
+//queryPage(startPageNum,lastPageNum,reqUrl);
+
+let lostImgArr = [
+    {pageNum:22,lostImgIndex:[1]},
+];
+
+/**
+ * 当有图片下载不全时调用
+ */
+//queryLostImg(lostImgArr,reqUrl);
