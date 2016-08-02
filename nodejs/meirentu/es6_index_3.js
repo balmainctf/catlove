@@ -45,6 +45,15 @@ var asyncReadFile = async function(){
     });
     console.log('使用微信访问的用户数是:' + inWeixin.length);
 
+    var WIFI = _.filter(mobileArr,(item)=>{
+        return item.indexOf('NetType/WIFI') != -1;
+    });
+    console.log('使用wifi访问的用户数是:' + WIFI.length);
+
+    var G4G = _.filter(mobileArr,(item)=>{
+        return item.indexOf('NetType/4G') != -1;
+    });
+    console.log('使用4g访问的用户数是:' + G4G.length);
 
 };
 

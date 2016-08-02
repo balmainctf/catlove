@@ -9,8 +9,8 @@ let request = require('./request.js');
 let _ = require('lodash');
 
 let startPageNum = 1;
-let lastPageNum = 23;
-let reqUrl = 'http://www.twfun.info/html/2015/07/965213.html';
+let lastPageNum = 21;
+let reqUrl = 'http://www.twfun.info/html/2014/06/50393.html';
 
 let errorPage = [];
 
@@ -154,7 +154,7 @@ let queryLostImg = async (arr,reqUrl) => {
 /**
  * 全局调用
  */
-//queryPage(startPageNum,lastPageNum,reqUrl);
+queryPage(startPageNum,lastPageNum,reqUrl);
 
 let lostImgArr = [
     {pageNum:22,lostImgIndex:[1]},
